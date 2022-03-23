@@ -18,17 +18,20 @@ void	swap(t_list *list)
 void	swap_a(t_list *list_a)
 {
 	swap(list_a);
+	ft_printf("sa\n");
 }
 
 void	swap_b(t_list *list_b)
 {
 	swap(list_b);
+	ft_printf("sb\n");
 }
 
 void	ss(t_list *list_a, t_list *list_b)
 {
 	swap(list_a);
 	swap(list_b);
+	ft_printf("ss\n");
 }
 
 void	push(t_list **list_a, t_list **list_b)
@@ -46,11 +49,13 @@ void	push(t_list **list_a, t_list **list_b)
 void	push_a(t_list **list_a, t_list **list_b)
 {
 	push(list_a, list_b);
+	ft_printf("pa\n");
 }
 
 void	push_b(t_list **list_a, t_list **list_b)
 {
 	push(list_b, list_a);
+	ft_printf("pb\n");
 }
 
 void	rotate(t_list **list)
@@ -72,17 +77,20 @@ void	rotate(t_list **list)
 void	rotate_a(t_list **list_a)
 {
 	rotate(list_a);
+	ft_printf("ra\n");
 }
 
 void	rotate_b(t_list **list_b)
 {
 	rotate(list_b);
+	ft_printf("rb\n");
 }
 
 void	rr(t_list **list_a, t_list **list_b)
 {
 	rotate(list_a);
 	rotate(list_b);
+	ft_printf("rr\n");
 }
 
 void	reverse_rotate(t_list **list)
@@ -104,17 +112,20 @@ void	reverse_rotate(t_list **list)
 void	rra(t_list **list_a)
 {
 	reverse_rotate(list_a);
+	ft_printf("rra\n");
 }
 
 void	rrb(t_list **list_b)
 {
 	reverse_rotate(list_b);
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_list **list_a, t_list **list_b)
 {
 	reverse_rotate(list_a);
 	reverse_rotate(list_b);
+	ft_printf("rrr\n");
 }
 
 
