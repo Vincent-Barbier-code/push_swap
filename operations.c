@@ -142,6 +142,7 @@ int main(void)
 	list_b = ft_lstnew_int(18);
 	ft_lstadd_front_int(&list_b, 38);
 	ft_lstadd_front_int(&list_b, 16);
+/*
 	// list_a = 16 38 18
 	swap(list_a); //list_a = 35 19 15  
 	swap(list_b); //list_b = 38 16 18
@@ -161,7 +162,7 @@ int main(void)
 
 	rrr(&list_a, &list_b); //list_a = 16 19 35 15
 						  //list_b = 38 18 
-
+*/
 	printf("\nlista :\n");
 	print(&list_a);
 	printf("\nlistb :\n");

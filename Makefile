@@ -1,53 +1,33 @@
-PUSH_SWAP_H = -L./push_swap -lft
-#LIB = -L./ft_printf/ft_printf.h
-#FT_PRINTF = -l./ft_printf/libftprintf.a
-UTILITAIRES = utilitaires.c
-OPERATIONS = operations.c
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+NAME = push_swap
+INC_PATH = ./
 
-all : operations
+SRC =    operations.c utilitaires.c
+OBJ = $(SRC:.c=.o)
+INCLUDES = push_swap.h
 
-operations : $(OPERATIONS)
-		$(CC)	$(UTILITAIRES) $(OPERATIONS) -o operations
-
-#operations : $(OPERATIONS)
-#		$(CC) $(OPERATIONS)  -o operations
-
-.c.o :
-		$(CC) $(FLAGS) -c -I 
-
-fclean:
-		rm -f operations
-
-re: 
-	fclean all 
-
-.PHONY: all clean fclean re
-
-#PUSH_SWAP_H = -L./push_swap -lft
+LIBFT = ./libft/libft.a
 FT_PRINTF = ./ft_printf/libftprintf.a
-UTILITAIRES = utilitaires.c
-OPERATIONS = operations.c
-CC = gcc
-FLAGS = -Wall -Wextra -Werror
 
-all : operations
+all : $(NAME)
 
-operations : $(OPERATIONS)
-		$(CC)	$(UTILITAIRES) $(OPERATIONS) $(FT_PRINTF) -o operations
+$(NAME) : $(OBJ)
+  $(CC) $(CFLAGS) $^ -I $(INC_PATH) -L ./ft_printf -lftprintf -o push_swap
 
-#operations : $(OPERATIONS)
-#		$(CC) $(OPERATIONS)  -o operations
+$(OBJ) : $(INC_PATH)$(INCLUDES)
 
-.c.o :
-		$(CC) $(FLAGS) -c -I 
+%.o : %.c
+    $(CC) $(CFLAGS) -o $@ -c $< -I $(INC_PATH)
+clean : 
+    rm -f $(OBJ)
 
-fclean:
-		rm -f operations
+fclean : clean
+    rm -f $(NAME)
 
-re: 
-	fclean all 
+re : fclean all
 
-.PHONY: all clean fclean re
+test : $(NAME)
+    echo "" && ./a.out && echo ""
 
+.PHONY : all fclean clean re exec test
