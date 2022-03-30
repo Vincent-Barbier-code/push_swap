@@ -10,18 +10,25 @@ int	ft_isdigit(int i)
 
 int	parsing(char *av)
 {
+	int	nb;
+
 	while (*av)
 	{
-		if (ft_isdigit(*av))
+		while (ft_isdigit(*av))	
+		{
+			nb = *av;
+			av++;	
+		}
+		if (*av == 32)
 			av++;
 		else
 		{
 			printf("Error");
 			exit(1);
 		}
+		av++;
 	}
-	
-
+	return(1);
 }
 
 int main(int ac, char **av)
@@ -31,5 +38,5 @@ int main(int ac, char **av)
 	i = 1;
 	while (i < ac)
 		parsing(av[i++]);
-
+		// push dans la liste creer back int
 }

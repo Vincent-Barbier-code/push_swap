@@ -36,6 +36,19 @@ void	ft_lstadd_front_int(t_list **list, int nb)
 	new->next = *list;
 	*list = new;
 }
+/*
+void	ft_lstadd_back_int(t_list **list, int nb)
+{
+	t_list *new;
+
+	new = ft_lstnew_int(nb);
+	while (**list)
+		list++;
+	if (!new || !*list)
+		return ;
+	new->next = *list;
+	*list = new;
+}*/
 
 void	ft_clear(t_list **lst)
 {
