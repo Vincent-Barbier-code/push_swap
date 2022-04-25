@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/04/25 21:28:02 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:45:31 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void print(t_list **list)
         current_node = current_node->next;
     }
 }
-
+/*
 int	is_sort(t_list **list)
 {
 	t_list *current_node;
@@ -40,7 +40,7 @@ int	is_sort(t_list **list)
         current_node = current_node->next;
     }
 }
-
+*/
 t_list	*ft_lstnew_int(int nb)
 {
 	t_list	*listenew;
