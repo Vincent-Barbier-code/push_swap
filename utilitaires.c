@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/04/25 18:57:24 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:28:02 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,27 @@
 void print(t_list **list)
 {
 	t_list *current_node;
+	
 	if (!list)
 		return;
 	current_node = *list;
    	while (current_node != NULL) 
 	{
-        printf("%d", current_node->content);
+        printf("nb = %d \n", current_node->content);
+        current_node = current_node->next;
+    }
+}
+
+int	is_sort(t_list **list)
+{
+	t_list *current_node;
+
+	if (!list)
+		return;
+	current_node = *list;
+   	while (current_node != NULL) 
+	{
+        printf("nb = %d \n", current_node->content);
         current_node = current_node->next;
     }
 }
@@ -46,7 +61,10 @@ void	ft_lstadd_front_int(t_list **list, int nb)
 	if (!new)
 		return ;
 	if (!list)
+	{
 		*list = new;
+		return ;
+	}
 	new->next = *list;
 	*list = new;
 }
@@ -54,17 +72,20 @@ void	ft_lstadd_front_int(t_list **list, int nb)
 void	ft_lstadd_back_int(t_list **list, int nb)
 {
 	t_list	*new;
+	t_list *tmp;
 
 	new = ft_lstnew_int(nb);
 	if (!new)
 		return ;
 	if(!list)
+	{
 		*list = new;
-	while ((*list)->next)
-		*list = (*list)->next;
-	//printf("%d",(*list)->content);
-	(*list)->next = new;
-	
+		return ;
+	}
+	tmp = *list;
+	while ((tmp)->next)	
+		tmp = (tmp)->next;
+	(tmp)->next = new;
 }
 
 void	ft_clear(t_list **list)
@@ -75,11 +96,8 @@ void	ft_clear(t_list **list)
 		return ;
 	while (*list)
 	{
-		//printf("p = %p \n", (*list));
-		//printf("n = %d \n", (*list)->content);
 		tmp = (*list)->next;
 		free((*list));
 		*list = tmp;
 	}
-	//free(list);
 }

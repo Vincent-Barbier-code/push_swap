@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/04/25 18:56:33 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/04/25 21:26:16 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ t_put	ft_atoi(const char *str)
 
 
 
-t_list	*fill_list_a(char *str)
+void	fill_list_a(char *str, t_list **list_a)
 {
 	t_put	put;
 	int		copy;
-	t_list	*list;
+	
 	static int		start = 1;
 
 	copy = 0;
@@ -70,21 +70,21 @@ t_list	*fill_list_a(char *str)
 		{
 			if (start)
 			{
-				list = ft_lstnew_int(put.nb);
+				*list_a = ft_lstnew_int(put.nb);
 				start = 0;
-				//printf("nb F= %d \n",put.nb);
+				//printf("nb F= %d \n", (*list_a)->content);
 			}
 			else
 			{
-				ft_lstadd_front_int(&list, put.nb);		
 				//printf("nb = %d \n",put.nb);
+				ft_lstadd_back_int(list_a, put.nb);
+				
 			}
 		}
 		copy = put.nb;
 		while(put.pass--)
 			str++;
 	}
-	return(list);
 }
 
 int	parsing(char *str)
@@ -127,12 +127,9 @@ int main(int ac, char **av)
 		exit(1);
 	i = 1;
 	while (i < ac)
-	{
-		list_a = fill_list_a(av[i++]);
-	}
+		fill_list_a(av[i++], &list_a);
 	printf("finis");	
-	//print(&list_a);
-	printf("\n");
+	print(&list_a);
 	ft_clear(&list_a);
 	exit(1);
 		// push dans la liste creer back int
