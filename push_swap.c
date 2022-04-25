@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
+/*   Updated: 2022/04/25 18:56:33 by vbarbier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	ft_isdigit(int i)
@@ -6,6 +18,12 @@ int	ft_isdigit(int i)
 		return (1);
 	else
 		return (0);
+}
+
+void	error()
+{	
+	printf("Error");
+	exit(1);
 }
 
 t_put	ft_atoi(const char *str)
@@ -27,20 +45,15 @@ t_put	ft_atoi(const char *str)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = nb * 10 + (str[i] - '0');
-		i++;
-	}
+		nb = nb * 10 + (str[i++] - '0');
+	if (nb > INT_MAX || nb < INT_MIN)
+		error();
 	put.nb = signe * nb;
 	put.pass = i;
 	return (put);
 }
 
-void	error()
-{	
-	printf("Error");
-	exit(1);
-}
+
 
 t_list	*fill_list_a(char *str)
 {
@@ -59,12 +72,12 @@ t_list	*fill_list_a(char *str)
 			{
 				list = ft_lstnew_int(put.nb);
 				start = 0;
-				printf("nb F= %d \n",put.nb);
+				//printf("nb F= %d \n",put.nb);
 			}
 			else
 			{
 				ft_lstadd_front_int(&list, put.nb);		
-				printf("nb = %d \n",put.nb);
+				//printf("nb = %d \n",put.nb);
 			}
 		}
 		copy = put.nb;
@@ -118,7 +131,7 @@ int main(int ac, char **av)
 		list_a = fill_list_a(av[i++]);
 	}
 	printf("finis");	
-	print(&list_a);
+	//print(&list_a);
 	printf("\n");
 	ft_clear(&list_a);
 	exit(1);

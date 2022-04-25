@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utilitaires.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
+/*   Updated: 2022/04/25 18:57:24 by vbarbier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /* Print all the elements in the linked list */
@@ -46,12 +58,13 @@ void	ft_lstadd_back_int(t_list **list, int nb)
 	new = ft_lstnew_int(nb);
 	if (!new)
 		return ;
-	if (!list)
+	if(!list)
 		*list = new;
-	while (*list)
-		list++;
-	new->next = *list;
-	*list = new;
+	while ((*list)->next)
+		*list = (*list)->next;
+	//printf("%d",(*list)->content);
+	(*list)->next = new;
+	
 }
 
 void	ft_clear(t_list **list)
@@ -63,9 +76,10 @@ void	ft_clear(t_list **list)
 	while (*list)
 	{
 		//printf("p = %p \n", (*list));
-		printf("n = %d \n", (*list)->content);
+		//printf("n = %d \n", (*list)->content);
 		tmp = (*list)->next;
 		free((*list));
-		list = &tmp;
+		*list = tmp;
 	}
+	//free(list);
 }
