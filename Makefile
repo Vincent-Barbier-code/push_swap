@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 NAME = push_swap
 INC_PATH = ./
 
-SRC = operations.c utilitaires.c
+SRC = operations.c utilitaires.c push_swap.c
 OBJ = $(SRC:.c=.o)
 INCLUDES = push_swap.h
 

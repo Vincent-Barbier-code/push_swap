@@ -9,7 +9,7 @@ void print(t_list **list)
 	current_node = *list;
    	while (current_node != NULL) 
 	{
-        printf("%d ", current_node->content);
+        printf("%d", current_node->content);
         current_node = current_node->next;
     }
 }
@@ -28,38 +28,44 @@ t_list	*ft_lstnew_int(int nb)
 
 void	ft_lstadd_front_int(t_list **list, int nb)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = ft_lstnew_int(nb);
-	if (!new || !*list)
+	if (!new)
 		return ;
+	if (!list)
+		*list = new;
 	new->next = *list;
 	*list = new;
 }
-/*
+// bug a regler sur ft_lst_add_back leak
 void	ft_lstadd_back_int(t_list **list, int nb)
 {
-	t_list *new;
+	t_list	*new;
 
 	new = ft_lstnew_int(nb);
-	while (**list)
-		list++;
-	if (!new || !*list)
+	if (!new)
 		return ;
+	if (!list)
+		*list = new;
+	while (*list)
+		list++;
 	new->next = *list;
 	*list = new;
-}*/
+}
 
-void	ft_clear(t_list **lst)
+void	ft_clear(t_list **list)
 {
 	t_list	*tmp;
 
-	if (!lst)
+	if (!list)
 		return ;
-	while (*lst)
+	while (*list)
 	{
-		tmp = (*lst)->next;
-		free((*lst));
-		(*lst) = tmp;
+		//printf("p = %p \n", (*list));
+		printf("n = %d \n", (*list)->content);
+		tmp = (*list)->next;
+		free((*list));
+		list = &tmp;
 	}
 }

@@ -1,4 +1,5 @@
 #include "push_swap.h"
+#include "stdio.h"
 
 void	swap(t_list *list)
 {
@@ -128,7 +129,7 @@ void	rrr(t_list **list_a, t_list **list_b)
 	ft_printf("rrr\n");
 }
 
-
+/*
 
 int main(void)
 {
@@ -140,12 +141,12 @@ int main(void)
 	ft_lstadd_front_int(&list_a, 19);
 	// list_a = 19 35 15
 	list_b = ft_lstnew_int(18);
-	ft_lstadd_front_int(&list_b, 38);
-	ft_lstadd_front_int(&list_b, 16);
-/*
+	//ft_lstadd_front_int(&list_b, 38);
+	//ft_lstadd_front_int(&list_b, 16);
+
 	// list_a = 16 38 18
-	swap(list_a); //list_a = 35 19 15  
-	swap(list_b); //list_b = 38 16 18
+	swap_a(list_a); //list_a = 35 19 15  
+	swap_b(list_b); //list_b = 38 16 18
 
 	ss(list_a, list_b); //list_a = 19 35 15 
 						//list_b = 16 38 18 
@@ -153,16 +154,17 @@ int main(void)
 	push_a(&list_a, &list_b); //list_a = 16 19 35 15
 							  //list_b =  38 18
 	
-	rotate(&list_a); //list_a = 19 35 15 16
+	rotate_a(&list_a); //list_a = 19 35 15 16
 
 	rr(&list_a, &list_b); //list_a = 35 15 16 19
 						  //list_b = 18 38
 
-	reverse_rotate(&list_a);//list_a = 19 35 15 16
+	rra(&list_a);//list_a = 19 35 15 16
 
 	rrr(&list_a, &list_b); //list_a = 16 19 35 15
 						  //list_b = 38 18 
-*/
+	
+	push_a(&list_a, &list_b);
 	printf("\nlista :\n");
 	print(&list_a);
 	printf("\nlistb :\n");
@@ -172,4 +174,4 @@ int main(void)
 	ft_clear(&list_b);
 	
 	
-}
+}*/

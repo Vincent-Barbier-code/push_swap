@@ -12,9 +12,16 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef	struct	s_put
+{
+	int	nb;
+	int	pass;
+}	t_put;
+
 void	print(t_list **list);
 t_list	*ft_lstnew_int(int nb);
 void	ft_lstadd_front_int(t_list **list, int nb);
+void	ft_lstadd_back_int(t_list **list, int nb);
 void	ft_clear(t_list **lst);
 
 //void	swap_a
