@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/01 22:28:51 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/01 22:47:01 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ int main(int ac, char **av)
 	if (checkdbandsort(&list_a))
 		exit(0);
 	printf("finis");
-	printf("sort ? =%d", checkdbandsort(&list_a));
 	print(&list_a);
 	ft_clear(&list_a);
 	exit(1);
