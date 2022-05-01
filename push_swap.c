@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/01 22:47:01 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/01 22:58:54 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,7 @@ void	fill_list_a(char *str, t_list **list_a)
 			str++;
 	}
 }
-/*
-int	checksort(int nb, t_list *list_new, int init)
-{
-	static copy;
 
-	if (!list_a)
-		return (0);
-	if (init)
-		copy = list_new->content; 
-
-}
-*/
 int	checkdbandsort(t_list **list_a)
 {
 	int sort;

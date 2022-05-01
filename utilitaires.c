@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/04/25 21:45:31 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/01 22:59:13 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,7 @@ void print(t_list **list)
         current_node = current_node->next;
     }
 }
-/*
-int	is_sort(t_list **list)
-{
-	t_list *current_node;
 
-	if (!list)
-		return;
-	current_node = *list;
-   	while (current_node != NULL) 
-	{
-        printf("nb = %d \n", current_node->content);
-        current_node = current_node->next;
-    }
-}
-*/
 t_list	*ft_lstnew_int(int nb)
 {
 	t_list	*listenew;
@@ -68,7 +54,7 @@ void	ft_lstadd_front_int(t_list **list, int nb)
 	new->next = *list;
 	*list = new;
 }
-// bug a regler sur ft_lst_add_back leak
+
 void	ft_lstadd_back_int(t_list **list, int nb)
 {
 	t_list	*new;
