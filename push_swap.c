@@ -6,27 +6,21 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/01 22:58:54 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/02 00:38:16 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_isdigit(int i)
+void	error(t_list **list_a)
 {
-	if ((i >= 48) && (i <= 57))
-		return (1);
-	else
-		return (0);
-}
-
-void	error()
-{	
+	if (*list_a)
+		ft_clear(list_a);
 	printf("Error\n");
 	exit(1);
 }
 
-t_put	ft_atoi(const char *str)
+t_put	ft_atoi(const char *str, t_list **list_a)
 {
 	int			i;
 	int			signe;
@@ -47,7 +41,7 @@ t_put	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + (str[i++] - '0');
 	if (nb > INT_MAX || nb < INT_MIN)
-		error();
+		error(list_a);
 	put.nb = signe * nb;
 	put.pass = i;
 	return (put);
@@ -61,12 +55,11 @@ void	fill_list_a(char *str, t_list **list_a)
 
 	while (*str)
 	{
-		put = ft_atoi(str);
+		put = ft_atoi(str, list_a);
 		if (start)
 		{
 			*list_a = ft_lstnew_int(put.nb);
 			start = 0;
-			//printf("nb F= %d \n", (*list_a)->content);
 		}
 		else
 			ft_lstadd_back_int(list_a, put.nb);
@@ -93,7 +86,7 @@ int	checkdbandsort(t_list **list_a)
 		while (copnew)
 		{
 			if (listenew->content == copnew->content)
-				error();
+				error(list_a);
 			copnew = copnew->next;
 		}
 		listenew = listenew->next;
@@ -101,7 +94,7 @@ int	checkdbandsort(t_list **list_a)
 	return(sort);
 }
 
-int	parsing(char *str)
+int	parsing(char *str, t_list **list_a)
 {
 	int i;
 	int flag;
@@ -117,13 +110,15 @@ int	parsing(char *str)
 		else if (str[i] == ' ' && (flag != 1 || flag == 3))
 			flag = 3;
 		else
-			error();
+			error(list_a);
 		i++;
 	}
 	if (!(str[i] >= '0' && str[i] <= '9'))
-		error();
+		error(list_a);
 	return(1);
 }
+
+//int	mediane_impair()
 
 int main(int ac, char **av)
 {
@@ -134,20 +129,22 @@ int main(int ac, char **av)
 	if (ac >= 2)
 	{
 		while (i < ac)
-			if (!parsing(av[i++]))
-				error();
+		{
+			if (!parsing(av[i++], &list_a))
+				error(&list_a);
+		}
 	}
 	else
 		exit(1);
 	i = 1;
 	while (i < ac)
 		fill_list_a(av[i++], &list_a);
-	if (checkdbandsort(&list_a))
-		exit(0);
-	printf("finis");
+	if (!(checkdbandsort(&list_a)))
+	{
+		printf("TRIE MOI CA\n");
+	}
+	printf("finis\n");
 	print(&list_a);
 	ft_clear(&list_a);
 	exit(1);
-		// push dans la liste creer back int
 }
-
