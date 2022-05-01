@@ -6,41 +6,21 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/02 01:07:53 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/02 00:51:21 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-int	mediane_impair(t_list **list_a)
+void	error(t_list **list_a)
 {
-	t_list list_new;
-
-	list_new =
-	while ()
-	{
-		
-	}
-	
-}
-*/
-
-void	error()
-{
-	printf("Error\n");
-	exit(1);
-}
-
-void	error_l(t_list **list_a)
-{
-	if (list_a)
+	if (*list_a)
 		ft_clear(list_a);
 	printf("Error\n");
 	exit(1);
 }
 
-t_put	ft_atoi(const char *str)
+t_put	ft_atoi(const char *str, t_list **list_a)
 {
 	int			i;
 	int			signe;
@@ -61,7 +41,7 @@ t_put	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + (str[i++] - '0');
 	if (nb > INT_MAX || nb < INT_MIN)
-		error();
+		error(list_a);
 	put.nb = signe * nb;
 	put.pass = i;
 	return (put);
@@ -75,7 +55,7 @@ void	fill_list_a(char *str, t_list **list_a)
 
 	while (*str)
 	{
-		put = ft_atoi(str);
+		put = ft_atoi(str, list_a);
 		if (start)
 		{
 			*list_a = ft_lstnew_int(put.nb);
@@ -91,30 +71,30 @@ void	fill_list_a(char *str, t_list **list_a)
 int	checkdbandsort(t_list **list_a)
 {
 	int sort;
-	t_list *listenew;
+	t_list *listnew;
 	t_list *copnew;
 
 	sort = 1;
 	if ((!list_a || !(*list_a)->next))
 		return (0);
-	listenew = *list_a;
-	while (listenew->next)
+	listnew = *list_a;
+	while (listnew->next)
 	{
-		copnew = listenew->next;
-		if (listenew->content > copnew->content)
+		copnew = listnew->next;
+		if (listnew->content > copnew->content)
 			sort = 0;
 		while (copnew)
 		{
-			if (listenew->content == copnew->content)
-				error_l(list_a);
+			if (listnew->content == copnew->content)
+				error(list_a);
 			copnew = copnew->next;
 		}
-		listenew = listenew->next;
+		listnew = listnew->next;
 	}
 	return(sort);
 }
 
-int	parsing(char *str)
+int	parsing(char *str, t_list **list_a)
 {
 	int i;
 	int flag;
@@ -130,16 +110,26 @@ int	parsing(char *str)
 		else if (str[i] == ' ' && (flag != 1 || flag == 3))
 			flag = 3;
 		else
-			error();
+			error(list_a);
 		i++;
 	}
 	if (!(str[i] >= '0' && str[i] <= '9'))
-		error();
+		error(list_a);
 	return(1);
 }
+/*
+int	mediane_impair(t_list **list_a)
+{
+	t_list list_new;
 
-//int	mediane_impair()
-
+	list_new =
+	while ()
+	{
+		
+	}
+	
+}
+*/
 int main(int ac, char **av)
 {
 	int i;
@@ -150,8 +140,8 @@ int main(int ac, char **av)
 	{
 		while (i < ac)
 		{
-			if (!parsing(av[i++]))
-				error();
+			if (!parsing(av[i++], &list_a))
+				error(&list_a);
 		}
 	}
 	else
@@ -160,7 +150,9 @@ int main(int ac, char **av)
 	while (i < ac)
 		fill_list_a(av[i++], &list_a);
 	if (!(checkdbandsort(&list_a)))
-		printf("TRIE LA LISTE\n");
+	{
+		printf("TRIE MOI CA\n");
+	}
 	printf("finis\n");
 	print(&list_a);
 	ft_clear(&list_a);
