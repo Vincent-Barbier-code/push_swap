@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/02 00:38:16 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/02 00:43:57 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,25 @@ void	fill_list_a(char *str, t_list **list_a)
 int	checkdbandsort(t_list **list_a)
 {
 	int sort;
-	t_list *listenew;
+	t_list *listnew;
 	t_list *copnew;
 
 	sort = 1;
 	if ((!list_a || !(*list_a)->next))
 		return (0);
-	listenew = *list_a;
-	while (listenew->next)
+	listnew = *list_a;
+	while (listnew->next)
 	{
-		copnew = listenew->next;
-		if (listenew->content > copnew->content)
+		copnew = listnew->next;
+		if (listnew->content > copnew->content)
 			sort = 0;
 		while (copnew)
 		{
-			if (listenew->content == copnew->content)
+			if (listnew->content == copnew->content)
 				error(list_a);
 			copnew = copnew->next;
 		}
-		listenew = listenew->next;
+		listnew = listnew->next;
 	}
 	return(sort);
 }
@@ -117,9 +117,19 @@ int	parsing(char *str, t_list **list_a)
 		error(list_a);
 	return(1);
 }
+/*
+int	mediane_impair(t_list **list_a)
+{
+	t_list list_new;
 
-//int	mediane_impair()
-
+	if (!l)
+	while ()
+	{
+		/* code 
+	}
+	
+}
+*/
 int main(int ac, char **av)
 {
 	int i;

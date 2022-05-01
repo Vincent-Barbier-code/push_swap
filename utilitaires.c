@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/01 22:59:13 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/02 00:40:44 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void print(t_list **list)
 
 t_list	*ft_lstnew_int(int nb)
 {
-	t_list	*listenew;
+	t_list	*listnew;
 
-	listenew = (t_list *)malloc(sizeof(t_list));
-	if (!listenew)
+	listnew = (t_list *)malloc(sizeof(t_list));
+	if (!listnew)
 		return (NULL);
-	listenew->content = nb;
-	listenew ->next = NULL;
-	return (listenew);
+	listnew->content = nb;
+	listnew ->next = NULL;
+	return (listnew);
 }
 
 void	ft_lstadd_front_int(t_list **list, int nb)
