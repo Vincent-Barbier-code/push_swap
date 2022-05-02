@@ -6,25 +6,11 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/02 01:07:53 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:15:18 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
-int	mediane_impair(t_list **list_a)
-{
-	t_list list_new;
-
-	list_new =
-	while ()
-	{
-		
-	}
-	
-}
-*/
 
 void	error()
 {
@@ -69,9 +55,8 @@ t_put	ft_atoi(const char *str)
 
 void	fill_list_a(char *str, t_list **list_a)
 {
-	t_put	put;
-	
-	static int		start = 1;
+	t_put		put;
+	static int	start = 1;
 
 	while (*str)
 	{
@@ -138,7 +123,45 @@ int	parsing(char *str)
 	return(1);
 }
 
-//int	mediane_impair()
+t_med	calcul_med(int copy, int new, t_med med)
+{
+	//static t_med med = {0, 0, 0};
+
+	if (copy > new)
+		med.sup++;
+	if (copy < new)
+		med.inf++;
+	return (med);
+}
+
+int	mediane(t_list **list_a)	//marche pour les impaires
+{
+	t_list	*list_new;
+	t_list	*copy;
+	t_med	med;
+
+	copy = *list_a;
+	list_new = (*list_a)->next;
+	med.sup = 0;
+	med.inf = 0;
+	while (copy)
+	{
+		list_new = *list_a;
+		while (list_new)
+		{
+			med = calcul_med(copy->content, list_new->content, med);
+			list_new = list_new->next;
+		}
+		if (med.sup + 1 == med.inf)
+			med.mediane = copy->content;
+		if (med.sup == med.inf)
+			med.mediane = copy->content;
+		med.sup = 0;
+		med.inf = 0;
+		copy = copy->next;
+	}
+	return(med.mediane);	
+}
 
 int main(int ac, char **av)
 {
@@ -163,6 +186,7 @@ int main(int ac, char **av)
 		printf("TRIE LA LISTE\n");
 	printf("finis\n");
 	print(&list_a);
+	mediane(&list_a);
 	ft_clear(&list_a);
 	exit(1);
 }

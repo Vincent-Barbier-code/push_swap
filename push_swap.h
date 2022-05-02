@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/02 00:03:42 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/02 03:21:19 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ typedef	struct	s_put
 	int	nb;
 	int	pass;
 }	t_put;
+
+typedef	struct s_med
+{
+	int	sup;
+	int	inf;
+	int mediane;
+}	t_med;
 
 void	print(t_list **list);
 t_list	*ft_lstnew_int(int nb);
