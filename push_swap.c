@@ -6,13 +6,13 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/02 21:15:18 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:07:02 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error()
+void	error(void)
 {
 	printf("Error\n");
 	exit(1);
@@ -68,16 +68,16 @@ void	fill_list_a(char *str, t_list **list_a)
 		}
 		else
 			ft_lstadd_back_int(list_a, put.nb);
-		while(put.pass--)
+		while (put.pass--)
 			str++;
 	}
 }
 
 int	checkdbandsort(t_list **list_a)
 {
-	int sort;
-	t_list *listenew;
-	t_list *copnew;
+	int		sort;
+	t_list	*listenew;
+	t_list	*copnew;
 
 	sort = 1;
 	if ((!list_a || !(*list_a)->next))
@@ -96,17 +96,17 @@ int	checkdbandsort(t_list **list_a)
 		}
 		listenew = listenew->next;
 	}
-	return(sort);
+	return (sort);
 }
 
 int	parsing(char *str)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 0;
 	flag = 3;
-	while(str[i + 1])
+	while (str[i + 1])
 	{
 		if ((str[i] == '-' || str[i] == '+') && (flag != 1 && flag != 2))
 			flag = 1;
@@ -120,13 +120,11 @@ int	parsing(char *str)
 	}
 	if (!(str[i] >= '0' && str[i] <= '9'))
 		error();
-	return(1);
+	return (1);
 }
 
 t_med	calcul_med(int copy, int new, t_med med)
 {
-	//static t_med med = {0, 0, 0};
-
 	if (copy > new)
 		med.sup++;
 	if (copy < new)
@@ -160,33 +158,75 @@ int	mediane(t_list **list_a)	//marche pour les impaires
 		med.inf = 0;
 		copy = copy->next;
 	}
-	return(med.mediane);	
+	return (med.mediane);
 }
 
-int main(int ac, char **av)
+void	error_pars_initlst( int ac, char **av, t_list **list_a)
 {
-	int i;
-	t_list *list_a;
+	int	i;
 
 	i = 1;
 	if (ac >= 2)
 	{
 		while (i < ac)
-		{
 			if (!parsing(av[i++]))
 				error();
-		}
 	}
 	else
 		exit(1);
 	i = 1;
 	while (i < ac)
-		fill_list_a(av[i++], &list_a);
+		fill_list_a(av[i++], list_a);
+}
+
+void	push_medtob(t_list **list_a, t_list **list_b)
+{
+	t_list	*copy_a;
+
+	copy_a = *list_a;
+	while (copy_a->content != mediane(list_a))
+		copy_a = copy_a->next;
+	if (!*list_b)
+	{
+		*list_b = ft_lstnew_int(copy_a->content);
+		copy_a = copy_a->next;
+	}
+	//ft_printf("content = %d \n", (*list_b)->content);
+	ft_printf("med = %d \n",mediane(list_a));
+	while (copy_a)
+	{
+		push_b(&copy_a, list_b);
+		ft_printf("content = %d \n", (*list_b)->content);
+		//copy_a = copy_a->next;
+	}
+	ft_clear(list_a);
+	*list_a = copy_a;
+	print(list_a);
+	//(*list_b)->next = NULL;
+//	push_a(&copy_a, list_b);
+}
+
+int	main(int ac, char **av)
+{
+	t_list	*list_a;
+	t_list	*list_b;
+
+	list_b = NULL;
+	error_pars_initlst(ac, av, &list_a);
 	if (!(checkdbandsort(&list_a)))
+	{
 		printf("TRIE LA LISTE\n");
+		//while (list_a)
+		//{
+			push_medtob(&list_a, &list_b);
+		//	print(&list_a);
+		//}
+	}
 	printf("finis\n");
 	print(&list_a);
-	mediane(&list_a);
+	ft_printf("listb: \n");
+	print(&list_b);
 	ft_clear(&list_a);
+	ft_clear(&list_b);
 	exit(1);
 }

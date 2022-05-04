@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/02 03:21:19 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/03 15:11:41 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	ft_lstadd_front_int(t_list **list, int nb);
 void	ft_lstadd_back_int(t_list **list, int nb);
 void	ft_clear(t_list **lst);
 
-//void	swap_a
+void	swap_a(t_list *list_a);
+void	push_a(t_list **list_a, t_list **list_b);
+void	push_b(t_list **list_a, t_list **list_b);
 
 #endif

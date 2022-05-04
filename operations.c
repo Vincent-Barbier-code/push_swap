@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:53 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/04/25 19:41:25 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:07:14 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ void	ss(t_list *list_a, t_list *list_b)
 	ft_printf("ss\n");
 }
 
-void	push(t_list **list_a, t_list **list_b)
+static void	push(t_list **list_a, t_list **list_b)
 {
-	t_list	*cp_list_b;
+	t_list *tmp;
 
 	if (!*list_b)
 		return ;
-	cp_list_b = *list_b;
-	ft_lstadd_front_int(list_a, cp_list_b->content);
-	*list_b = cp_list_b->next;
-	free(cp_list_b);
+	ft_lstadd_front_int(list_a, (*list_b)->content);
+	tmp = (*list_b)->next;
+	//free(*list_b);
+	*list_b = tmp;
 }
 
 void	push_a(t_list **list_a, t_list **list_b)
@@ -71,7 +71,7 @@ void	push_b(t_list **list_a, t_list **list_b)
 	ft_printf("pb\n");
 }
 
-void	rotate(t_list **list)
+static void	rotate(t_list **list)
 {
 	t_list	*cp_list;
 	t_list	*prems;
@@ -106,7 +106,7 @@ void	rr(t_list **list_a, t_list **list_b)
 	ft_printf("rr\n");
 }
 
-void	reverse_rotate(t_list **list)
+static void	reverse_rotate(t_list **list)
 {
 	t_list	*cp_list;
 	t_list	*der;
