@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/04 13:07:02 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:21:35 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ t_med	calcul_med(int copy, int new, t_med med)
 	return (med);
 }
 
-int	mediane(t_list **list_a)	//marche pour les impaires
+int	mediane(t_list **list_a)
 {
 	t_list	*list_new;
 	t_list	*copy;
@@ -181,26 +181,27 @@ void	error_pars_initlst( int ac, char **av, t_list **list_a)
 
 void	push_medtob(t_list **list_a, t_list **list_b)
 {
-	t_list	*copy_a;
+	int med;
 
-	copy_a = *list_a;
-	while (copy_a->content != mediane(list_a))
-		copy_a = copy_a->next;
-	if (!*list_b)
+	med = mediane(list_a);
+	ft_printf("med = %d \n",med);
+	while (*list_a)
 	{
-		*list_b = ft_lstnew_int(copy_a->content);
-		copy_a = copy_a->next;
+		if ((*list_a)->content <= med)
+		{
+			if (!*list_b)
+			{
+				*list_b = ft_lstnew_int((*list_a)->content);
+				ft_printf("content1 = %d \n", (*list_b)->content);
+			}
+			else
+			{
+			push_b(list_a, list_b);
+			ft_printf("content2 = %d \n", (*list_b)->content);
+			}
+		}
+		*list_a = (*list_a)->next;
 	}
-	//ft_printf("content = %d \n", (*list_b)->content);
-	ft_printf("med = %d \n",mediane(list_a));
-	while (copy_a)
-	{
-		push_b(&copy_a, list_b);
-		ft_printf("content = %d \n", (*list_b)->content);
-		//copy_a = copy_a->next;
-	}
-	ft_clear(list_a);
-	*list_a = copy_a;
 	print(list_a);
 	//(*list_b)->next = NULL;
 //	push_a(&copy_a, list_b);
@@ -223,6 +224,7 @@ int	main(int ac, char **av)
 		//}
 	}
 	printf("finis\n");
+	printf("lista: \n");
 	print(&list_a);
 	ft_printf("listb: \n");
 	print(&list_b);

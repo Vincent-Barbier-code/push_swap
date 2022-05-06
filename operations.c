@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:53 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/04 13:07:14 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:55:06 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static void	push(t_list **list_a, t_list **list_b)
 
 	if (!*list_b)
 		return ;
-	ft_lstadd_front_int(list_a, (*list_b)->content);
+	ft_lstadd_back_int(list_a, (*list_b)->content);
 	tmp = (*list_b)->next;
-	//free(*list_b);
+	free(*list_b);
 	*list_b = tmp;
 }
 
@@ -141,8 +141,8 @@ void	rrr(t_list **list_a, t_list **list_b)
 	ft_printf("rrr\n");
 }
 
-/*
 
+/*
 int main(void)
 {
 	t_list	*list_a;
@@ -153,8 +153,8 @@ int main(void)
 	ft_lstadd_front_int(&list_a, 19);
 	// list_a = 19 35 15
 	list_b = ft_lstnew_int(18);
-	//ft_lstadd_front_int(&list_b, 38);
-	//ft_lstadd_front_int(&list_b, 16);
+	ft_lstadd_front_int(&list_b, 38);
+	ft_lstadd_front_int(&list_b, 16);
 
 	// list_a = 16 38 18
 	swap_a(list_a); //list_a = 35 19 15  
@@ -166,6 +166,11 @@ int main(void)
 	push_a(&list_a, &list_b); //list_a = 16 19 35 15
 							  //list_b =  38 18
 	
+	printf("\nlista :\n");
+	print(&list_a);
+	printf("\nlistb :\n");
+	print(&list_b);
+
 	rotate_a(&list_a); //list_a = 19 35 15 16
 
 	rr(&list_a, &list_b); //list_a = 35 15 16 19
@@ -183,7 +188,7 @@ int main(void)
 	print(&list_b);
 
 	ft_clear(&list_a);
-	ft_clear(&list_b);
+	ft_clear(&list_b);	
 	
-	
-}*/
+}
+*/

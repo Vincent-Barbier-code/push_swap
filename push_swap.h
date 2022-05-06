@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/03 15:11:41 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:00:55 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_list
 {
 	int				content;
 	struct s_list	*next;
+	struct s_list	*previous;
 }	t_list;
 
 typedef	struct	s_put

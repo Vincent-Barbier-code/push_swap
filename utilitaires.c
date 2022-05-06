@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/04 12:46:06 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:50:56 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ t_list	*ft_lstnew_int(int nb)
 	if (!listnew)
 		return (NULL);
 	listnew->content = nb;
-	listnew ->next = NULL;
+	listnew->next = NULL;
+	listnew->previous = NULL;
 	return (listnew);
 }
 
@@ -50,13 +51,14 @@ void	ft_lstadd_front_int(t_list **list, int nb)
 		return ;
 	}
 	new->next = *list;
+	new->previous = NULL;
 	*list = new;
 }
 
 void	ft_lstadd_back_int(t_list **list, int nb)
 {
 	t_list	*new;
-	t_list *tmp;
+	t_list	*tmp;
 
 	new = ft_lstnew_int(nb);
 	if(!list)
@@ -67,7 +69,8 @@ void	ft_lstadd_back_int(t_list **list, int nb)
 	tmp = *list;
 	while ((tmp)->next)	
 		tmp = (tmp)->next;
-	(tmp)->next = new;
+	tmp->next = new;
+	new->previous = tmp;
 }
 
 void	ft_clear(t_list **list)
