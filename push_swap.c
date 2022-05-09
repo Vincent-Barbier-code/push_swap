@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/08 14:32:57 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:56:15 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	error_ll(t_list **list_a, t_list **list_b)
 	exit(1);
 }
 
-t_put	ft_atoi(const char *str)
+t_put	ft_atoi(const char *str, t_list **list_a)
 {
 	int			i;
 	int			signe;
@@ -57,7 +57,7 @@ t_put	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + (str[i++] - '0');
 	if (nb > INT_MAX || nb < INT_MIN)
-		error();
+		error_l(list_a);
 	put.nb = signe * nb;
 	put.pass = i;
 	return (put);
@@ -70,7 +70,7 @@ void	fill_list_a(char *str, t_list **list_a)
 
 	while (*str)
 	{
-		put = ft_atoi(str);
+		put = ft_atoi(str, list_a);
 		if (start)
 		{
 			*list_a = ft_lstnew_int(put.nb);
@@ -189,61 +189,61 @@ void	error_pars_initlst( int ac, char **av, t_list **list_a)
 		fill_list_a(av[i++], list_a);
 }
 
-void	push_medtob(t_list **list_a, t_list **list_b)
+void	push_medtob(t_list **list_a, t_list **list_b, int med)
 {
-	int		med;
 	t_list	*copy;
-	
-	med = mediane(list_a);
 	copy = *list_a;
 	ft_printf("med = %d \n",med);
-//	print(&copy);
 	while (copy)
 	{
 		printf("dedans = %d \n",copy->content);
+		if (copy->previous == NULL && copy->content <= med)
+		{
+			swap_a(&copy);
+			copy = copy->next;
+		}
+		printf("apres swap = %d \n",copy->content);
 		if ((copy)->content <= med)
 		{
 			ft_printf("WTFFFFF");
-		//	if (!copy->next && !copy->previous)
-		//		*list_a = NULL;
-			push_b(&copy, list_b);
+			push_b(&copy, list_b); 
 		}
 		else
+		{
+			if ((copy)->previous)
+				ft_printf("ok  = %d \n", (copy)->previous->content);
 			copy = (copy)->next;
-	}
-	
-	if (len_list(&copy) == 1)
-	{
-		*list_a = copy;
-		printf("bougha = %d \n",(*list_a)->content);
-	}
-	
-	
-//	printf("dedans = %d \n",(*list_a)->content);
-	ft_printf("SORTIE");
+		}
+		//sleep(1);
+	}	
+	ft_printf("LIST :\n");
+	ft_printf("SORTIE-------------------------------------------------------------------\n");
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*list_a;
 	t_list	*list_b;
+	int med;
 
 	list_b = NULL;
 	error_pars_initlst(ac, av, &list_a);
 	if (!(checkdbandsort(&list_a)))
 	{
 		printf("TRIE LA LISTE\n");
-		while (list_a)
+		while (len_list(&list_a) != 1)
 		{
-		//	if (len_list(&list_a) == -1)
-		//		error_ll(&list_a, &list_b);
-			push_medtob(&list_a, &list_b);
-			
+			if (len_list(&list_a) == -1)
+				error_ll(&list_a, &list_b);
+			med = mediane(&list_a);
+			push_medtob(&list_a, &list_b, med);
+		//	if (!list_a)
+		//		list_a = list_a->next;
 			ft_printf("len = %d\n", len_list(&list_a));
 			
 		//	push_medtob(&list_a, &list_b);
 		//	print(&list_a);
-			sleep(2);
+		//	sleep(2);
 		
 		}
 	}

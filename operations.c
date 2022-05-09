@@ -6,41 +6,40 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:53 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/08 09:07:22 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:26:59 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "stdio.h"
 
-void	swap(t_list *list)
+void	swap(t_list **list)
 {
 	int	cpnb1;
 	int	cpnb2;
 
-	if	(!list || !list->next)
+	if	(!list || !(*list)->next)
 		return ;
-	cpnb1 = list->content;
-	cpnb2 = list->next->content;
+	cpnb1 = (*list)->content;
+	cpnb2 = (*list)->next->content;
 
-
-	list->content = cpnb2;
-	list->next->content = cpnb1;
+	(*list)->content = cpnb2;
+	(*list)->next->content = cpnb1;
 }
 
-void	swap_a(t_list *list_a)
+void	swap_a(t_list **list_a)
 {
 	swap(list_a);
 	ft_printf("sa\n");
 }
 
-void	swap_b(t_list *list_b)
+void	swap_b(t_list **list_b)
 {
 	swap(list_b);
 	ft_printf("sb\n");
 }
 
-void	ss(t_list *list_a, t_list *list_b)
+void	ss(t_list **list_a, t_list **list_b)
 {
 	swap(list_a);
 	swap(list_b);
@@ -57,9 +56,7 @@ static void	push(t_list **list_a, t_list **list_b)
 	if (!*list_a)
 		*list_a = ft_lstnew_int((*list_b)->content);
 	else
-		ft_lstadd_back_int(list_a, (*list_b)->content);
- //	ft_printf("okok");
-	//print(list_b);
+		ft_lstadd_front_int(list_a, (*list_b)->content);
 	ft_printf("en cours %d \n",(*list_b)->content);
 	tmp = (*list_b)->next;
 	pre = (*list_b)->previous;
@@ -68,15 +65,19 @@ static void	push(t_list **list_a, t_list **list_b)
 	if (tmp)
 	{
 		(*list_b)->previous = pre;
-		ft_printf("l ancien en cours %p \n",(*list_b)->previous);
+	//	ft_printf("l ancien en cours %p \n",(*list_b)->previous);
 		ft_printf(" contenu %d \n",(*list_b)->content);
-		ft_printf("en apres %p \n",(*list_b)->next);
-		ft_printf("tmp existe \n");
+	//	ft_printf("en apres %p \n",(*list_b)->next);
+	//	ft_printf("tmp existe \n");
 	}
 	if (pre)
 	{
 		pre->next = tmp;
 		ft_printf("pre existe \n");
+	}
+	if (!pre && !tmp)
+	{
+		//**list_b = &list_b;
 	}
 		
 }
