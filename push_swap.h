@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/06 21:00:55 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/08 08:28:18 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef	struct s_med
 }	t_med;
 
 void	print(t_list **list);
+int		len_list(t_list **list);
 t_list	*ft_lstnew_int(int nb);
 void	ft_lstadd_front_int(t_list **list, int nb);
 void	ft_lstadd_back_int(t_list **list, int nb);

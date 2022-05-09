@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:58 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/06 21:50:56 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/08 14:30:25 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,34 @@ void print(t_list **list)
 {
 	t_list *current_node;
 	
-	if (!list)
+	if (!*list)
 		return;
 	current_node = *list;
    	while (current_node != NULL) 
 	{
         printf("nb = %d \n", current_node->content);
+		if (!(current_node->previous == NULL))
+			printf("previous content = %d \n", current_node->previous->content);
         current_node = current_node->next;
     }
+}
+
+int	len_list(t_list **list)
+{
+	int		i;
+	t_list	*copy;
+	
+	i = 0;
+	if (!*list)
+		return (-1);
+	copy = *list;
+   	while (copy) 
+	{
+        i++;
+		ft_printf("OK %d \n",copy->content);
+        copy = copy->next;
+    }
+	return (i);
 }
 
 t_list	*ft_lstnew_int(int nb)
@@ -51,7 +71,7 @@ void	ft_lstadd_front_int(t_list **list, int nb)
 		return ;
 	}
 	new->next = *list;
-	new->previous = NULL;
+	new->next->previous = new;
 	*list = new;
 }
 

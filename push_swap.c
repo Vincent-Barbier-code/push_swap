@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/06 21:21:35 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/08 14:32:57 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void	error_l(t_list **list_a)
 {
 	if (list_a)
 		ft_clear(list_a);
+	printf("Error\n");
+	exit(1);
+}
+
+void	error_ll(t_list **list_a, t_list **list_b)
+{
+	if (list_a)
+		ft_clear(list_a);
+	if (list_b)
+		ft_clear(list_b);
 	printf("Error\n");
 	exit(1);
 }
@@ -181,30 +191,36 @@ void	error_pars_initlst( int ac, char **av, t_list **list_a)
 
 void	push_medtob(t_list **list_a, t_list **list_b)
 {
-	int med;
-
+	int		med;
+	t_list	*copy;
+	
 	med = mediane(list_a);
+	copy = *list_a;
 	ft_printf("med = %d \n",med);
-	while (*list_a)
+//	print(&copy);
+	while (copy)
 	{
-		if ((*list_a)->content <= med)
+		printf("dedans = %d \n",copy->content);
+		if ((copy)->content <= med)
 		{
-			if (!*list_b)
-			{
-				*list_b = ft_lstnew_int((*list_a)->content);
-				ft_printf("content1 = %d \n", (*list_b)->content);
-			}
-			else
-			{
-			push_b(list_a, list_b);
-			ft_printf("content2 = %d \n", (*list_b)->content);
-			}
+			ft_printf("WTFFFFF");
+		//	if (!copy->next && !copy->previous)
+		//		*list_a = NULL;
+			push_b(&copy, list_b);
 		}
-		*list_a = (*list_a)->next;
+		else
+			copy = (copy)->next;
 	}
-	print(list_a);
-	//(*list_b)->next = NULL;
-//	push_a(&copy_a, list_b);
+	
+	if (len_list(&copy) == 1)
+	{
+		*list_a = copy;
+		printf("bougha = %d \n",(*list_a)->content);
+	}
+	
+	
+//	printf("dedans = %d \n",(*list_a)->content);
+	ft_printf("SORTIE");
 }
 
 int	main(int ac, char **av)
@@ -217,11 +233,19 @@ int	main(int ac, char **av)
 	if (!(checkdbandsort(&list_a)))
 	{
 		printf("TRIE LA LISTE\n");
-		//while (list_a)
-		//{
+		while (list_a)
+		{
+		//	if (len_list(&list_a) == -1)
+		//		error_ll(&list_a, &list_b);
 			push_medtob(&list_a, &list_b);
+			
+			ft_printf("len = %d\n", len_list(&list_a));
+			
+		//	push_medtob(&list_a, &list_b);
 		//	print(&list_a);
-		//}
+			sleep(2);
+		
+		}
 	}
 	printf("finis\n");
 	printf("lista: \n");

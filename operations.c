@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:53 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/06 20:55:06 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/08 09:07:22 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,36 @@ void	ss(t_list *list_a, t_list *list_b)
 
 static void	push(t_list **list_a, t_list **list_b)
 {
-	t_list *tmp;
+	t_list	*tmp;
+	t_list	*pre;
 
 	if (!*list_b)
 		return ;
-	ft_lstadd_back_int(list_a, (*list_b)->content);
+	if (!*list_a)
+		*list_a = ft_lstnew_int((*list_b)->content);
+	else
+		ft_lstadd_back_int(list_a, (*list_b)->content);
+ //	ft_printf("okok");
+	//print(list_b);
+	ft_printf("en cours %d \n",(*list_b)->content);
 	tmp = (*list_b)->next;
+	pre = (*list_b)->previous;
 	free(*list_b);
 	*list_b = tmp;
+	if (tmp)
+	{
+		(*list_b)->previous = pre;
+		ft_printf("l ancien en cours %p \n",(*list_b)->previous);
+		ft_printf(" contenu %d \n",(*list_b)->content);
+		ft_printf("en apres %p \n",(*list_b)->next);
+		ft_printf("tmp existe \n");
+	}
+	if (pre)
+	{
+		pre->next = tmp;
+		ft_printf("pre existe \n");
+	}
+		
 }
 
 void	push_a(t_list **list_a, t_list **list_b)
@@ -70,7 +92,7 @@ void	push_b(t_list **list_a, t_list **list_b)
 	push(list_b, list_a);
 	ft_printf("pb\n");
 }
-
+	
 static void	rotate(t_list **list)
 {
 	t_list	*cp_list;
@@ -81,10 +103,12 @@ static void	rotate(t_list **list)
 	cp_list = *list;
 	prems = *list;
 	*list = prems->next;
+	(*list)->previous = NULL;
 	while (cp_list->next)
 		cp_list = cp_list->next;
 	cp_list->next = prems;
 	prems->next = NULL;
+	prems->previous = cp_list;
 }
 
 void	rotate_a(t_list **list_a)
