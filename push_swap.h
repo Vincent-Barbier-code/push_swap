@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/09 18:14:16 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:05:51 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,12 @@ void	ft_clear(t_list **lst);
 void	swap_a(t_list **list_a);
 void	push_a(t_list **list_a, t_list **list_b);
 void	push_b(t_list **list_a, t_list **list_b);
+void	rotate_a(t_list **list_a);
+void	rotate_b(t_list **list_a);
+void	rr(t_list **list_a, t_list **list_b);
+void	rra(t_list **list_a);
+void	rrb(t_list **list_a);
+void	rrr(t_list **list_a, t_list **list_b);
+
 
 #endif

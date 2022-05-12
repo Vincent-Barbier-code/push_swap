@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:53 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/09 19:26:59 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/12 01:34:39 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,19 @@ static void	push(t_list **list_a, t_list **list_b)
 		*list_a = ft_lstnew_int((*list_b)->content);
 	else
 		ft_lstadd_front_int(list_a, (*list_b)->content);
-	ft_printf("en cours %d \n",(*list_b)->content);
 	tmp = (*list_b)->next;
 	pre = (*list_b)->previous;
-	free(*list_b);
+	if (len_list(list_b) == 1)
+	{
+		ft_clear(list_b);
+	}
+	else
+		free(*list_b);
 	*list_b = tmp;
 	if (tmp)
-	{
 		(*list_b)->previous = pre;
-	//	ft_printf("l ancien en cours %p \n",(*list_b)->previous);
-		ft_printf(" contenu %d \n",(*list_b)->content);
-	//	ft_printf("en apres %p \n",(*list_b)->next);
-	//	ft_printf("tmp existe \n");
-	}
 	if (pre)
-	{
 		pre->next = tmp;
-		ft_printf("pre existe \n");
-	}
-	if (!pre && !tmp)
-	{
-		//**list_b = &list_b;
-	}
-		
 }
 
 void	push_a(t_list **list_a, t_list **list_b)
@@ -139,12 +129,17 @@ static void	reverse_rotate(t_list **list)
 	if (!*list)
 		return ;
 	cp_list = *list;
+//	if (!cp_list->next)
+//		return ;
 	while (cp_list->next->next)
 		cp_list = cp_list->next;
 	der = cp_list->next;
+	//printf("%d", der->content);
 	cp_list->next = NULL;
-	der->next=*list;
-	*list = der;
+	der->next = *list;
+	der->previous = NULL;
+	(*list)->previous = der;
+	*list = der;	
 }
 
 void	rra(t_list **list_a)

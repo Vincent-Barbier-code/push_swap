@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/09 19:56:15 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/12 01:59:35 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,69 +189,209 @@ void	error_pars_initlst( int ac, char **av, t_list **list_a)
 		fill_list_a(av[i++], list_a);
 }
 
-void	push_medtob(t_list **list_a, t_list **list_b, int med)
+void	push_medtob(t_list **list_a, t_list **list_b)
 {
 	t_list	*copy;
+	int		med;
+
+	med = mediane(list_a);
 	copy = *list_a;
-	ft_printf("med = %d \n",med);
+//	ft_printf("med = %d \n",med);
 	while (copy)
 	{
-		printf("dedans = %d \n",copy->content);
+//		printf("dedans = %d \n",copy->content);
 		if (copy->previous == NULL && copy->content <= med)
 		{
 			swap_a(&copy);
 			copy = copy->next;
 		}
-		printf("apres swap = %d \n",copy->content);
+//		printf("apres swap = %d \n",copy->content);
 		if ((copy)->content <= med)
 		{
-			ft_printf("WTFFFFF");
+//			ft_printf("WTFFFFF");
 			push_b(&copy, list_b); 
 		}
 		else
 		{
-			if ((copy)->previous)
-				ft_printf("ok  = %d \n", (copy)->previous->content);
+			// if ((copy)->previous)
+			// 	ft_printf("ok  = %d \n", (copy)->previous->content);
 			copy = (copy)->next;
 		}
 		//sleep(1);
 	}	
-	ft_printf("LIST :\n");
-	ft_printf("SORTIE-------------------------------------------------------------------\n");
+//	ft_printf("LIST :\n");
+//	ft_printf("SORTIE-------------------------------------------------------------------\n");
+}
+
+int	supb_in_a(t_list **list_a, t_list **list_b)
+{
+	t_list	*cop_a;
+	t_list	*cop_b;
+	int	sup;
+
+	sup = INT_MAX;
+	cop_a = *list_a;
+	cop_b = *list_b;
+	while (cop_a)
+	{
+		if (cop_b->content < cop_a->content && cop_a->content < sup)
+			sup = cop_a->content;
+		cop_a = cop_a -> next;
+	}
+	return (sup);
+}
+
+int	up_or_down(t_list **list_a, t_list **list_b)
+{
+	t_list	*cop_a;
+	int		up;
+	int		down;
+
+	up = 0;
+	down = 0;
+	cop_a = *list_a;
+	while (cop_a->content != supb_in_a(list_a, list_b))
+	{
+		up++;
+		cop_a = cop_a->next;
+	}
+	if (!up)
+		return (0);
+	while (cop_a)
+	{
+		down++;
+		cop_a = cop_a->next;
+	}
+	if (up < down)
+		return (1);
+	if (up > down)
+		return (-1);
+	return (0);
+}
+
+int	min(t_list **list_a)
+{
+	t_list	*cop_a;
+	int	min;
+
+	min = INT_MAX;
+	cop_a = *list_a;
+	while (cop_a)
+	{
+		if (cop_a->content < min)
+			min = cop_a->content;
+		cop_a = cop_a -> next;
+	}
+	return (min);
+}
+
+int min_up(t_list **list_a)
+{
+	t_list	*cop_a;
+	int i;
+
+	i = 0;
+	cop_a = *list_a;
+	while (cop_a->content != min(list_a))
+	{
+		i++;
+		cop_a = cop_a->next;
+	}
+	if (i == 0)
+		return (0);
+	if ((len_list(list_a)) / 2 < i)
+		return (1);
+	else
+		return (-1);
 }
 
 int	main(int ac, char **av)
 {
 	t_list	*list_a;
 	t_list	*list_b;
-	int med;
+//	int rotate;
+//	int reverse;
 
 	list_b = NULL;
 	error_pars_initlst(ac, av, &list_a);
 	if (!(checkdbandsort(&list_a)))
 	{
-		printf("TRIE LA LISTE\n");
+		//printf("TRIE LA LISTE\n");
 		while (len_list(&list_a) != 1)
 		{
 			if (len_list(&list_a) == -1)
 				error_ll(&list_a, &list_b);
-			med = mediane(&list_a);
-			push_medtob(&list_a, &list_b, med);
-		//	if (!list_a)
-		//		list_a = list_a->next;
-			ft_printf("len = %d\n", len_list(&list_a));
-			
-		//	push_medtob(&list_a, &list_b);
-		//	print(&list_a);
-		//	sleep(2);
-		
+			push_medtob(&list_a, &list_b);
+			//ft_printf("len = %d\n", len_list(&list_a));
+			//supb_in_a(&list_a, &list_b);
 		}
+		while (len_list(&list_b) != 0 && len_list(&list_b) != -1)
+		{
+				if (up_or_down(&list_a, &list_b) == 1)
+				{
+					while (up_or_down(&list_a, &list_b) != 0 && len_list(&list_a) != 1 )
+					{	
+						rotate_a(&list_a);
+						sleep(1);
+					}
+				//	rotate_a(&list_a);
+				}
+				//	ft_printf("up or d =%d \n", up_or_down(&list_a, &list_b));
+				else if (up_or_down(&list_a, &list_b) == -1)
+				{
+					while (up_or_down(&list_a, &list_b) != 0 && len_list(&list_a) != 1)
+					{	
+						rra(&list_a);
+						//ft_printf("lista: \n");
+						//print(&list_a);
+					}
+				//	rra(&list_a);
+				}
+				//ft_printf("up or d =%d \n", up_or_down(&list_a, &list_b));
+				//ft_printf("lista: \n");
+				// print(&list_a);
+				// ft_printf("listb: \n");
+				// print(&list_b);
+		
+			//ft_printf("SORTIE---------------------------------------------------------");
+		/*	if (rotate)
+				rotate_a(&list_a);
+			if (reverse)
+				rra(&list_a);
+		*/
+			//if (len_list(&list_b) == 1)
+			//	clear_and_finish(&list_a, &list_b);
+			push_a(&list_a, &list_b);
+		}
+	while (min_up(&list_a))
+		{
+			if ((min_up(&list_a) == 1))
+			{
+				while (min_up(&list_a))
+					rotate_a(&list_a);
+				//ft_printf("lista: \n");
+				//print(&list_a);
+				//sleep(1);
+			}
+			else if ((min_up(&list_a) == -1))
+			{
+				while (min_up(&list_a))
+					rra(&list_a);
+				//ft_printf("lista: \n");
+				//print(&list_a);
+				//sleep(1);
+			} 
+		}
+
 	}
-	printf("finis\n");
-	printf("lista: \n");
-	print(&list_a);
-	ft_printf("listb: \n");
-	print(&list_b);
+	else
+		exit(1);
+	//	printf("DEJA TRIE\n");
+	//printf("finis\n");
+//	printf("lista: \n");
+//	print(&list_a);
+	//ft_printf("listb: \n");
+	//print(&list_b);
 	ft_clear(&list_a);
 	ft_clear(&list_b);
 	exit(1);
