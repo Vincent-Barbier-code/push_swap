@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/12 07:01:44 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/12 07:48:14 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,7 @@ int	up_or_down(t_list **list_a, t_list **list_b)
 		down++;
 		cop_a = cop_a->next;
 	}
-	if (up < down)
+	if (up <= down)
 		return (1);
 	if (up > down)
 		return (-1);
@@ -348,35 +348,40 @@ int	main(int ac, char **av)
 			push_medtob(&list_a, &list_b);
 			//ft_printf("len = %d\n", len_list(&list_a));
 			//supb_in_a(&list_a, &list_b);
+			
 		}
 		while (len_list(&list_b) != 0 && len_list(&list_b) != -1)
 		{
-				if (up_or_down(&list_a, &list_b) == 1)
-				{
-					while (up_or_down(&list_a, &list_b) != 0 && len_list(&list_a) != 1 )
-					{	
-						rotate_a(&list_a);
-						//sleep(1);
-					}
-				//	rotate_a(&list_a);
+		if (up_or_down(&list_a, &list_b) == 1)
+			{
+				while (up_or_down(&list_a, &list_b) != 0) //&& len_list(&list_a) != 1 ) ???
+				{	
+					rotate_a(&list_a);
+					// ft_printf("lista: \n");
+					// print(&list_a);
+					// sleep(1);
 				}
-				//	ft_printf("up or d =%d \n", up_or_down(&list_a, &list_b));
-				else if (up_or_down(&list_a, &list_b) == -1)
-				{
-					while (up_or_down(&list_a, &list_b) != 0 && len_list(&list_a) != 1)
-					{	
-						rra(&list_a);
-						//ft_printf("lista: \n");
-						//print(&list_a);
-					}
-				//	rra(&list_a);
+				//rotate_a(&list_a);
+			}
+			//	ft_printf("up or d =%d \n", up_or_down(&list_a, &list_b));
+		else if (up_or_down(&list_a, &list_b) == -1)
+			{
+				while (up_or_down(&list_a, &list_b) != 0 && len_list(&list_a) != 1)
+				{	
+					rra(&list_a);
+					// ft_printf("lista: \n");
+					// print(&list_a);
+					// sleep(1);
 				}
+				//rra(&list_a);
+			}
+
 				//ft_printf("up or d =%d \n", up_or_down(&list_a, &list_b));
 				//ft_printf("lista: \n");
 				// print(&list_a);
 				// ft_printf("listb: \n");
-				// print(&list_b);
-		
+			//print(&list_b);
+			push_a(&list_a, &list_b);
 			//ft_printf("SORTIE---------------------------------------------------------");
 		/*	if (rotate)
 				rotate_a(&list_a);
@@ -385,7 +390,7 @@ int	main(int ac, char **av)
 		*/
 			//if (len_list(&list_b) == 1)
 			//	clear_and_finish(&list_a, &list_b);
-			push_a(&list_a, &list_b);
+			
 		}
 	while (min_up(&list_a))
 		{
@@ -393,9 +398,9 @@ int	main(int ac, char **av)
 			{
 				while (min_up(&list_a))
 					rotate_a(&list_a);
-				//ft_printf("lista: \n");
-				//print(&list_a);
-				//sleep(1);
+				// ft_printf("lista: \n");
+				// print(&list_a);
+				// sleep(1);
 			}
 			else if ((min_up(&list_a) == -1))
 			{
@@ -411,7 +416,7 @@ int	main(int ac, char **av)
 	else
 		printf("DEJA TRIE\n");
 	//printf("finis\n");
-	// printf("lista: \n");
+	//printf("lista: \n");
 	//print(&list_a);
 	// ft_printf("listb: \n");
 	//print(&list_b);
