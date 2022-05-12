@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:53 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/12 01:34:39 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/12 06:51:20 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	ss(t_list **list_a, t_list **list_b)
 static void	push(t_list **list_a, t_list **list_b)
 {
 	t_list	*tmp;
-	t_list	*pre;
 
 	if (!*list_b)
 		return ;
@@ -58,7 +57,6 @@ static void	push(t_list **list_a, t_list **list_b)
 	else
 		ft_lstadd_front_int(list_a, (*list_b)->content);
 	tmp = (*list_b)->next;
-	pre = (*list_b)->previous;
 	if (len_list(list_b) == 1)
 	{
 		ft_clear(list_b);
@@ -67,9 +65,8 @@ static void	push(t_list **list_a, t_list **list_b)
 		free(*list_b);
 	*list_b = tmp;
 	if (tmp)
-		(*list_b)->previous = pre;
-	if (pre)
-		pre->next = tmp;
+		(*list_b)->previous = NULL;
+
 }
 
 void	push_a(t_list **list_a, t_list **list_b)
@@ -129,17 +126,15 @@ static void	reverse_rotate(t_list **list)
 	if (!*list)
 		return ;
 	cp_list = *list;
-//	if (!cp_list->next)
-//		return ;
 	while (cp_list->next->next)
 		cp_list = cp_list->next;
 	der = cp_list->next;
-	//printf("%d", der->content);
-	cp_list->next = NULL;
-	der->next = *list;
-	der->previous = NULL;
+	//ft_printf("ok =%d", der->content);
 	(*list)->previous = der;
-	*list = der;	
+	der->next = *list;
+	cp_list->next = NULL;
+	der->previous = NULL;
+	(*list) = der;
 }
 
 void	rra(t_list **list_a)

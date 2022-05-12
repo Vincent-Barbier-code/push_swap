@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/12 01:59:35 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/12 07:01:44 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,38 +189,62 @@ void	error_pars_initlst( int ac, char **av, t_list **list_a)
 		fill_list_a(av[i++], list_a);
 }
 
+int	verif_med(t_list **list_a, int med)
+{
+	t_list	*copy;
+
+	copy = *list_a;
+	while(copy)
+	{
+		if (copy->content <= med)
+			return(1);
+		copy = copy->next;
+	}
+	return (0);
+}
+
 void	push_medtob(t_list **list_a, t_list **list_b)
 {
 	t_list	*copy;
 	int		med;
+	int		i = 0;
 
 	med = mediane(list_a);
-	copy = *list_a;
-//	ft_printf("med = %d \n",med);
-	while (copy)
+	copy = (*list_a);
+	//ft_printf("med = %d \n",med);
+	while (verif_med(&copy, med))
 	{
-//		printf("dedans = %d \n",copy->content);
-		if (copy->previous == NULL && copy->content <= med)
+		//print(list_a);
+		i++;
+//		printf("\n%d\n",i);
+		//ft_printf("dedans = %d \n",copy->content);
+		//sleep(1);
+		if (copy->previous == NULL && copy->content > med)
 		{
-			swap_a(&copy);
-			copy = copy->next;
+			//ft_printf("copy->prev = %p",copy->previous);
+			rra(&copy);
 		}
-//		printf("apres swap = %d \n",copy->content);
-		if ((copy)->content <= med)
+//		ft_printf("apres swap = %d \n",copy->content);
+		if (copy->content <= med)
 		{
 //			ft_printf("WTFFFFF");
+			
+		//	print(list_b);
+			//ft_printf("copy->prev = %p",copy->previous);
+			//ft_printf("copy->prev = %p",copy->next);
 			push_b(&copy, list_b); 
 		}
-		else
-		{
-			// if ((copy)->previous)
-			// 	ft_printf("ok  = %d \n", (copy)->previous->content);
-			copy = (copy)->next;
-		}
+		//else
+		//	copy = copy->next;
 		//sleep(1);
-	}	
+	}
+	*list_a = copy;
+//	printf("cop: \n");
+//	print(&copy);
+//	ft_printf("a: \n");
+//	print(list_a);
 //	ft_printf("LIST :\n");
-//	ft_printf("SORTIE-------------------------------------------------------------------\n");
+	//ft_printf("SORTIE-------------------------------------------------------------------\n");
 }
 
 int	supb_in_a(t_list **list_a, t_list **list_b)
@@ -332,7 +356,7 @@ int	main(int ac, char **av)
 					while (up_or_down(&list_a, &list_b) != 0 && len_list(&list_a) != 1 )
 					{	
 						rotate_a(&list_a);
-						sleep(1);
+						//sleep(1);
 					}
 				//	rotate_a(&list_a);
 				}
@@ -385,14 +409,13 @@ int	main(int ac, char **av)
 
 	}
 	else
-		exit(1);
-	//	printf("DEJA TRIE\n");
+		printf("DEJA TRIE\n");
 	//printf("finis\n");
-//	printf("lista: \n");
-//	print(&list_a);
-	//ft_printf("listb: \n");
+	// printf("lista: \n");
+	//print(&list_a);
+	// ft_printf("listb: \n");
 	//print(&list_b);
 	ft_clear(&list_a);
-	ft_clear(&list_b);
+	//ft_clear(&list_b);
 	exit(1);
 }
