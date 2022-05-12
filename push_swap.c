@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/12 07:48:14 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/12 12:47:30 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -411,10 +411,7 @@ int	main(int ac, char **av)
 				//sleep(1);
 			} 
 		}
-
 	}
-	else
-		printf("DEJA TRIE\n");
 	//printf("finis\n");
 	//printf("lista: \n");
 	//print(&list_a);
