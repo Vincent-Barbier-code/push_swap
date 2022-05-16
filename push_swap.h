@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/11 20:05:51 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/15 22:02:25 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,37 @@ typedef	struct s_med
 	int mediane;
 }	t_med;
 
+//list_utils.c
 void	print(t_list **list);
-int		len_list(t_list **list);
 t_list	*ft_lstnew_int(int nb);
 void	ft_lstadd_front_int(t_list **list, int nb);
 void	ft_lstadd_back_int(t_list **list, int nb);
 void	ft_clear(t_list **lst);
 
+//list_utils1.c
+int	len_list(t_list **list);
+int	min(t_list **list_a);
+int	max(t_list **list_a);
+
+//parsing.c
+t_put	ft_atoi(const char *str, t_list **list_a);
+void	fill_list_a(char *str, t_list **list_a);
+int		checkdbandsort(t_list **list_a);
+int		parsing(char *str);
+
+//error.c
+void	error();
+void	error_l(t_list **list_a);
+void	error_ll(t_list **list_a, t_list **list_b);
+void	error_pars_initlst( int ac, char **av, t_list **list_a);
+
+//mediane.c
+t_med	calcul_med(int copy, int new, t_med med);
+int		mediane(t_list **list_a);
+int		verif_med(t_list **list_a, int med);
+void	push_medtob(t_list **list_a, t_list **list_b);
+
+//operations : push.c swap.c rotate.c rrtotate.c
 void	swap_a(t_list **list_a);
 void	push_a(t_list **list_a, t_list **list_b);
 void	push_b(t_list **list_a, t_list **list_b);

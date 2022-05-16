@@ -2,7 +2,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address -g3
 NAME = push_swap
 INC_PATH = ./
-SRC = operations.c utilitaires.c push_swap.c
+SRC = push_swap.c error.c \
+	list_utils.c list_utils1.c \
+	swap.c push.c rotate.c rrotate.c \
+	parsing.c mediane.c
 OBJ = $(SRC:.c=.o)
 DEPS = push_swap.h Makefile
 
