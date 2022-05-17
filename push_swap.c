@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/17 13:03:56 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/17 18:31:04 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	up_or_down(t_list **list_a, t_list **list_b)
 		down++;
 		cop_a = cop_a->next;
 	}
-	//ft_printf("up = %d down = %d \n",up,down);
 	if (up <= down)
 		return (-down);
 	if (up > down)
@@ -86,9 +85,9 @@ int	who_to_push(t_list **list_a, t_list **list_b)
 	while (copy->next && cmp < (len_list(list_b) / 2))
 	{
 		cost2 = val_abs(up_or_down(list_a, &copy)) + cmp;
-		ft_printf("UP OR DOWN: %d \n", up_or_down(list_a, &copy));
-		ft_printf("cost1: %d \n", cost1);
-		ft_printf("cost2: %d \n", cost2);
+		// ft_printf("UP OR DOWN: %d \n", up_or_down(list_a, &copy));
+		// ft_printf("cost1: %d \n", cost1);
+		// ft_printf("cost2: %d \n", cost2);
 				
 		if (cost2 < cost1)
 		{
@@ -160,20 +159,88 @@ int min_up(t_list **list_a)
 		return (-1);
 }
 
-void	push_tob(t_list **list_a, t_list **list_b)
+int		ft_rescale(int num, int min, int max)
+{
+	int result;
+
+	result = ((float)(num - min) / (float)(max - min)) * 99;
+	return (result);
+}
+
+
+int	verif_tob(t_list **list_a, int min, int max, int sup)
 {
 	t_list	*copy;
-	int		maximum;
 
-	copy = (*list_a);
-	maximum = max(list_a);
-	while (copy->next)
+	copy = *list_a;
+	while(copy)
 	{
-		if (copy->content == maximum)
-			rotate_a(&copy);
-		push_b(&copy, list_b);
+		if (ft_rescale(copy->content, min, max) < sup)
+			return(1);
+		copy = copy->next;
 	}
+	return (0);
+}
+
+int up_or_down2(t_list **list_a, int min ,int max, int sup)
+{
+	t_list	*cop_a;
+	int		up;
+	int		down;
+
+	up = 0;
+	down = 0;
+	cop_a = *list_a;
+	while (cop_a->next && ft_rescale(cop_a->content, min, max) < sup)
+	{
+		up++;
+		cop_a = cop_a->next;
+	}
+	while (cop_a->next)
+	{
+		cop_a = cop_a->next;
+	}
+	while (cop_a->previous && (ft_rescale(cop_a->content, min, max) < sup))
+	{
+		down++;
+		cop_a = cop_a->previous;
+	}
+	if (up <= down)
+		return (-1);
+	if (up > down)
+		return (1);
+	return (0);
+}
+
+void	push_tob(t_list **list_a, t_list **list_b, int min, int max)
+{
+	t_list	*copy;
+	int sup = 19;
+	copy = (*list_a);
+	
+	while (len_list(&copy) != 1)
+	{
+	while (verif_tob(&copy, min, max, sup) && len_list(&copy) != 1)
+		{
+			//len = len_list(&copy);
+			//ft_printf("min =%d    max =%d     sup=%d ft=%d\n", min,max,sup,ft_rescale(copy->content, min, max));
+			if (ft_rescale(copy->content, min, max) < sup && (copy->content != max))
+			{
+				push_b(&copy, list_b);
+			}
+			else
+			{
+				//ft_printf("J OPTI");
+				if (up_or_down2(&copy, min, max, sup) < 0)
+					rotate_a(&copy);
+				else if (up_or_down2(&copy, min, max, sup) > 0)
+					rra(&copy);
+				
+			}
+		}
 	*list_a = copy;
+	sup = sup +20;
+	}
 }
 
 void meds_sort(t_list **list_a, t_list **list_b)
@@ -195,17 +262,11 @@ void final_sort(t_list **list_a)
 		{
 			while (min_up(list_a))
 				rotate_a(list_a);
-			// ft_printf("lista: \n");
-			// print(&list_a);
-			// sleep(1);
 		}
 		else if ((min_up(list_a) == -1))
 		{
 			while (min_up(list_a))
 				rra(list_a);
-			//ft_printf("lista: \n");
-			//print(&list_a);
-			//sleep(1);
 		} 
 	}
 }
@@ -216,42 +277,22 @@ void	refill_a(t_list **list_a,t_list **list_b)
 	{
 		// ft_printf("ICIIIIII = %d\n", up_or_down(list_a, list_b));
 	//who_to_push(list_a, list_b);// NULLE LA FCT
-	// 	rotate_b(list_b);
 	if (up_or_down(list_a, list_b) < 0)
 		{
 			while (up_or_down(list_a, list_b) != 0)
-			{	
 				rotate_a(list_a);
-				//ft_printf("lista: \n");
-				//print(list_a);
-				//sleep(1);
-			}
-			//rotate_a(list_a);
 		}
 	else if (up_or_down(list_a, list_b) > 0)
 		{
 			while (up_or_down(list_a, list_b) != 0)
-			{	
 				rra(list_a);
-				// ft_printf("lista: \n");
-				// print(list_a);
-				//sleep(1);
-			}
-			//rra(list_a);
 		}
-			//ft_printf("up or d =%d \n", up_or_down(list_a, list_b));
-			// ft_printf("lista: \n");
-			// print(list_a);
-			// ft_printf("listb: \n");
-			// print(list_b);
-			//if (len_list(list_b) == 1)
 	else
 			push_a(list_a, list_b);
-		
-			
-		//ft_printf("SORTIE---------------------------------------------------------");
 	}
 }
+
+
 
 int	main(int ac, char **av)
 {
@@ -263,16 +304,17 @@ int	main(int ac, char **av)
 	if (!(checkdbandsort(&list_a)))
 	{
 		//printf("TRIE LA LISTE\n");
-	//	if (len_list(&list_a) <= 100)
-	//	 	push_tob(&list_a, &list_b);
-	//	else
-			meds_sort(&list_a, &list_b);
+		if (len_list(&list_a) <= 3)
+		 	sort_2_3(&list_a);
+		else
+			push_tob(&list_a, &list_b, min(&list_a), max(&list_a));
+			//meds_sort(&list_a, &list_b);
 		refill_a(&list_a, &list_b);
 		final_sort(&list_a);
 	}
 //	printf("finis\n");
-//	printf("lista: \n");
-//	print(&list_a);
+	// printf("lista: \n");
+	// print(&list_a);
 //	ft_printf("listb: \n");
 //	print(&list_b);	
 	ft_clear(&list_a);

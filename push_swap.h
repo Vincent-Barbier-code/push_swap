@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/17 00:43:02 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/17 16:13:39 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ t_med	calcul_med(int copy, int new, t_med med);
 int		mediane(t_list **list_a);
 int		verif_med(t_list **list_a, int med);
 void	push_medtob(t_list **list_a, t_list **list_b);
+
+void	sort_2_3(t_list **list);
 
 //operations : push.c swap.c rotate.c rrtotate.c
 void	swap_a(t_list **list_a);
