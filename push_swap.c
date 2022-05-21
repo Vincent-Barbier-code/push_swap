@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/21 21:21:20 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/21 21:44:49 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ int up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
 {
 	t_list	*copy;
-	int sup = 19;
+	int sup = 20;
 	copy = (*list_a);
 	
 	while (len_list(&copy) != 1)
@@ -233,7 +233,7 @@ void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
 			}
 		}
 	*list_a = copy;
-	sup = sup + 20;
+	sup = sup + 21;
 	}
 }
 
@@ -258,7 +258,7 @@ void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len)
 			}
 		}
 	*list_a = copy;
-	sup = sup + 46;
+	sup = sup + 47;
 	}
 }
 
