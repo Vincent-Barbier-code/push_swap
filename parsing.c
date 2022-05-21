@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:37:52 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/15 21:40:14 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/21 21:05:08 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_put	ft_atoi(const char *str, t_list **list_a)
 	}
 	while (str[i] >= '0' && str[i] <= '9')
 		nb = nb * 10 + (str[i++] - '0');
-	if (nb > INT_MAX || nb < INT_MIN)
-		error_l(list_a);
 	put.nb = signe * nb;
+	if (put.nb > INT_MAX || put.nb < INT_MIN)
+		error_l(list_a);
 	put.pass = i;
 	return (put);
 }

@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/17 18:31:04 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/21 21:21:20 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,30 +159,30 @@ int min_up(t_list **list_a)
 		return (-1);
 }
 
-int		ft_rescale(int num, int min, int max)
+int		ft_rescale(int num, t_ext ext, int len)
 {
 	int result;
 
-	result = ((float)(num - min) / (float)(max - min)) * 99;
+	result = ((float)(num - ext.min) / (float)(ext.max - ext.min)) * (len - 1);
 	return (result);
 }
 
 
-int	verif_tob(t_list **list_a, int min, int max, int sup)
+int	verif_tob(t_list **list_a, t_ext ext, int sup, int len)
 {
 	t_list	*copy;
 
 	copy = *list_a;
 	while(copy)
 	{
-		if (ft_rescale(copy->content, min, max) < sup)
+		if (ft_rescale(copy->content, ext, len) < sup)
 			return(1);
 		copy = copy->next;
 	}
 	return (0);
 }
 
-int up_or_down2(t_list **list_a, int min ,int max, int sup)
+int up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 {
 	t_list	*cop_a;
 	int		up;
@@ -191,7 +191,7 @@ int up_or_down2(t_list **list_a, int min ,int max, int sup)
 	up = 0;
 	down = 0;
 	cop_a = *list_a;
-	while (cop_a->next && ft_rescale(cop_a->content, min, max) < sup)
+	while (cop_a->next && ft_rescale(cop_a->content, ext, len) < sup)
 	{
 		up++;
 		cop_a = cop_a->next;
@@ -200,7 +200,7 @@ int up_or_down2(t_list **list_a, int min ,int max, int sup)
 	{
 		cop_a = cop_a->next;
 	}
-	while (cop_a->previous && (ft_rescale(cop_a->content, min, max) < sup))
+	while (cop_a->previous && (ft_rescale(cop_a->content, ext, len) < sup))
 	{
 		down++;
 		cop_a = cop_a->previous;
@@ -212,7 +212,7 @@ int up_or_down2(t_list **list_a, int min ,int max, int sup)
 	return (0);
 }
 
-void	push_tob(t_list **list_a, t_list **list_b, int min, int max)
+void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
 {
 	t_list	*copy;
 	int sup = 19;
@@ -220,26 +220,45 @@ void	push_tob(t_list **list_a, t_list **list_b, int min, int max)
 	
 	while (len_list(&copy) != 1)
 	{
-	while (verif_tob(&copy, min, max, sup) && len_list(&copy) != 1)
+	while (verif_tob(&copy, ext, sup, len) && len_list(&copy) != 1)
 		{
-			//len = len_list(&copy);
-			//ft_printf("min =%d    max =%d     sup=%d ft=%d\n", min,max,sup,ft_rescale(copy->content, min, max));
-			if (ft_rescale(copy->content, min, max) < sup && (copy->content != max))
-			{
+			if (ft_rescale(copy->content, ext, len) < sup && (copy->content != ext.max))
 				push_b(&copy, list_b);
-			}
 			else
 			{
-				//ft_printf("J OPTI");
-				if (up_or_down2(&copy, min, max, sup) < 0)
+				if (up_or_down2(&copy, ext, sup, len) < 0)
 					rotate_a(&copy);
-				else if (up_or_down2(&copy, min, max, sup) > 0)
+				else if (up_or_down2(&copy, ext, sup, len) > 0)
 					rra(&copy);
-				
 			}
 		}
 	*list_a = copy;
-	sup = sup +20;
+	sup = sup + 20;
+	}
+}
+
+void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len)
+{
+	t_list	*copy;
+	int sup = 46;
+	copy = (*list_a);
+	
+	while (len_list(&copy) != 1)
+	{
+	while (verif_tob(&copy, ext, sup, len) && len_list(&copy) != 1)
+		{
+			if (ft_rescale(copy->content, ext, len) < sup && (copy->content != ext.max))
+				push_b(&copy, list_b);
+			else
+			{
+				if (up_or_down2(&copy, ext, sup, len) < 0)
+					rotate_a(&copy);
+				else if (up_or_down2(&copy, ext, sup, len) > 0)
+					rra(&copy);
+			}
+		}
+	*list_a = copy;
+	sup = sup + 46;
 	}
 }
 
@@ -298,16 +317,23 @@ int	main(int ac, char **av)
 {
 	t_list	*list_a;
 	t_list	*list_b;
+	t_ext	ext;
+	int		len;
 
 	list_b = NULL;
 	error_pars_initlst(ac, av, &list_a);
 	if (!(checkdbandsort(&list_a)))
 	{
+		ext.min = min(&list_a);
+		ext.max = max(&list_a);
+		len = len_list(&list_a);
 		//printf("TRIE LA LISTE\n");
-		if (len_list(&list_a) <= 3)
+		if (len <= 3)
 		 	sort_2_3(&list_a);
+		else if (len < 500)
+			push_tob100(&list_a, &list_b, ext, len);
 		else
-			push_tob(&list_a, &list_b, min(&list_a), max(&list_a));
+			push_tob500(&list_a, &list_b, ext, len);
 			//meds_sort(&list_a, &list_b);
 		refill_a(&list_a, &list_b);
 		final_sort(&list_a);

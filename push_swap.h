@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/17 16:13:39 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/21 21:03:43 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,16 @@ typedef struct s_list
 
 typedef	struct	s_put
 {
-	int	nb;
+	long int	nb;
 	int	pass;
 }	t_put;
+
+
+typedef	struct s_ext
+{
+	int	min;
+	int	max;
+}	t_ext;
 
 typedef	struct s_med
 {
