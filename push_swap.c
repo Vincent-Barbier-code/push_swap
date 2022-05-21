@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mvue <mvue@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/21 21:44:49 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/21 22:10:36 by mvue             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,9 @@ int min_up(t_list **list_a)
 	if (i == 0)
 		return (0);
 	if ((len_list(list_a)) / 2 < i)
-		return (1);
-	else
 		return (-1);
+	else
+		return (1);
 }
 
 int		ft_rescale(int num, t_ext ext, int len)
