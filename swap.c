@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:30:04 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/15 21:30:07 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/23 17:05:24 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ void	swap(t_list **list)
 	int	cpnb1;
 	int	cpnb2;
 
-	if	(!list || !(*list)->next)
+	if (!list || !(*list)->next)
 		return ;
 	cpnb1 = (*list)->content;
 	cpnb2 = (*list)->next->content;
-
 	(*list)->content = cpnb2;
 	(*list)->next->content = cpnb1;
 }

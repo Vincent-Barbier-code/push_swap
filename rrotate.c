@@ -6,12 +6,12 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:33:36 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/15 21:34:47 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/23 17:05:54 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-	
+
 static void	reverse_rotate(t_list **list)
 {
 	t_list	*cp_list;
@@ -23,7 +23,6 @@ static void	reverse_rotate(t_list **list)
 	while (cp_list->next->next)
 		cp_list = cp_list->next;
 	der = cp_list->next;
-	//ft_printf("ok =%d", der->content);
 	(*list)->previous = der;
 	der->next = *list;
 	cp_list->next = NULL;

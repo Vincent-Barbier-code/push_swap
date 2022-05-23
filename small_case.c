@@ -5,19 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 15:55:16 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/17 16:13:22 by vbarbier         ###   ########.fr       */
+/*   Created: 2022/05/07 15:55:16 by vbarbier          #+#    #+#             */
+/*   Updated: 2022/05/23 17:14:35 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	case_3(t_list **list)
+static int	case_3(t_list **list)
 {
 	if ((*list)->content > (*list)->next->content \
 		&& (*list)->content > (*list)->next->next->content)
 	{
-		if((*list)->next->content > (*list)->next->next->content)
+		if ((*list)->next->content > (*list)->next->next->content)
 			return (1);
 		return (2);
 	}
@@ -33,7 +33,7 @@ int	case_3(t_list **list)
 void	sort_2_3(t_list **list)
 {
 	int	cas;
-	
+
 	if (len_list(list) == 2)
 	{
 		swap_a(list);

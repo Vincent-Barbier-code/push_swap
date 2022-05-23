@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:25:33 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/16 22:47:04 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/23 17:11:26 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,23 @@ int	len_list(t_list **list)
 {
 	int		i;
 	t_list	*copy;
-	
+
 	i = 0;
 	if (!*list)
 		return (-1);
 	copy = *list;
-   	while (copy) 
+	while (copy)
 	{
-        i++;
-		//ft_printf("OK %d \n",copy->content);
-        copy = copy->next;
-    }
+		i++;
+		copy = copy->next;
+	}
 	return (i);
 }
 
 int	min(t_list **list_a)
 {
 	t_list	*cop_a;
-	int	min;
+	int		min;
 
 	min = INT_MAX;
 	cop_a = *list_a;
@@ -49,7 +48,7 @@ int	min(t_list **list_a)
 int	max(t_list **list_a)
 {
 	t_list	*cop_a;
-	int	max;
+	int		max;
 
 	max = INT_MIN;
 	cop_a = *list_a;

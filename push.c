@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:30:52 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/15 22:09:44 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/23 17:07:56 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	push(t_list **list_a, t_list **list_b)
 	*list_b = tmp;
 	if (tmp)
 		(*list_b)->previous = NULL;
-
 }
 
 void	push_a(t_list **list_a, t_list **list_b)
