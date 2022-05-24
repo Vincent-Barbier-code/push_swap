@@ -21,9 +21,8 @@ void	print(t_list **list)
 	current_node = *list;
 	while (current_node != NULL)
 	{
-		if (!(current_node->previous == NULL))
-			ft_printf("previous content = %d \n"\
-			, current_node->previous->content);
+		//if (!(current_node->previous == NULL))
+			//ft_printf("previous content = %d \n"\ , current_node->previous->content);
 		ft_printf("\n nb = %d \n", current_node->content);
 		current_node = current_node->next;
 	}

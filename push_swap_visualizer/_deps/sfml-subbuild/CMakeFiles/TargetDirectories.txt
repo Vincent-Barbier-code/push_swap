@@ -1,3 +1,0 @@
-/home/vincent/Projets_en_cours/push_swap/push_swap_visualizer/_deps/sfml-subbuild/CMakeFiles/edit_cache.dir
-/home/vincent/Projets_en_cours/push_swap/push_swap_visualizer/_deps/sfml-subbuild/CMakeFiles/rebuild_cache.dir
-/home/vincent/Projets_en_cours/push_swap/push_swap_visualizer/_deps/sfml-subbuild/CMakeFiles/sfml-populate.dir

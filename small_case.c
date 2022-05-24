@@ -12,84 +12,68 @@
 
 #include "push_swap.h"
 
-static int	case_3(t_list **list)
+void	case_2(t_list **list)
 {
-	if ((*list)->content > (*list)->next->content \
-		&& (*list)->content > (*list)->next->next->content)
-	{
-		if ((*list)->next->content > (*list)->next->next->content)
-			return (1);
+	if (((*list)->content > (*list)->next->content))
+		swap_a(list);
+}
+
+static int	whatcase_3(t_list **list)
+{
+	if ((((*list)->content > (*list)->next->content) && \
+	((*list)->next->content) < (*list)->next->next->content) && \
+	((*list)->content < (*list)->next->next->content))
+		return (1);
+	if (((*list)->content > (*list)->next->content) && \
+	((*list)->next->content) > (*list)->next->next->content)
 		return (2);
-	}
-	if ((*list)->content < (*list)->next->content \
-		&& (*list)->content < (*list)->next->next->content)
+	if (((*list)->content > (*list)->next->content) && \
+	((*list)->next->content) < (*list)->next->next->content)
 		return (3);
-	if ((*list)->content < (*list)->next->content)
+	if ((((*list)->content < (*list)->next->content) && \
+	((*list)->next->content) > (*list)->next->next->content) && \
+	((*list)->content < (*list)->next->next->content))
 		return (4);
-	else
+	if ((((*list)->content < (*list)->next->content) && \
+	((*list)->next->content) > (*list)->next->next->content) && \
+	((*list)->content > (*list)->next->next->content))
 		return (5);
+	return (0);
 }
 
-void	sort_2_3(t_list **list)
+void case_3(t_list **list)
 {
-	int	cas;
-
-	if (len_list(list) == 2)
-	{
+	if (whatcase_3(list) == 1)
 		swap_a(list);
-		return ;
-	}
-	cas = case_3(list);
-	if (cas == 1)
+	else if (whatcase_3(list) == 2)
 	{
 		swap_a(list);
 		rra(list);
 	}
-	if (cas == 2)
+	else if (whatcase_3(list) == 3)
 		rotate_a(list);
-	if (cas == 3)
+	else if (whatcase_3(list) == 4)
 	{
 		swap_a(list);
 		rotate_a(list);
 	}
-	if (cas == 4)
+	else if (whatcase_3(list) == 5)
 		rra(list);
-	if (cas == 5)
-		swap_a(list);
-}
-/*
-void	sort_first_a(t_li **stack)
-{
-	int		first;
-	t_li	*start;
-
-	start = *stack;
-	first = (*stack)->content;
-	while ((*stack)->next)
-	{
-		if ((*stack)->next->content < first)
-			op_sa(stack);
-		*stack = (*stack)->next;
-	}
-	*stack = start;
 }
 
-void	sort_5(t_li **stack_a, t_li **stack_b)
+void case_5(t_list **list_a, t_list **list_b)
 {
-	if (len_stack(*stack_a) < 5)
+	while (1)
 	{
-		op_pb(stack_a, stack_b);
-		sort_3(stack_a);
-		op_pa(stack_a, stack_b);
-		sort_first_a(stack_a);
-		return ;
+		if (max(list_a) == (*list_a)->content)
+			rotate_a(list_a);
+		if (len_list(list_a) == 3)
+		{
+			case_3(list_a);
+			return ;	
+		}
+		else
+			push_b(list_a, list_b);
 	}
-	op_pb(stack_a, stack_b);
-	op_pb(stack_a, stack_b);
-	sort_3(stack_a);
-	op_pa(stack_a,stack_b);
-	sort_first_a(stack_a);
-	op_pa(stack_a,stack_b);
-	sort_first_a(stack_a);
+	
 }
-*/	

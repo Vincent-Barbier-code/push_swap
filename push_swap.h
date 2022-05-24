@@ -70,8 +70,9 @@ void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len);
 void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len);
 
 //small_case.c
-void	sort_2_3(t_list **list);
-void	sort_5(t_list **list);
+void	case_2(t_list **list);
+void	case_3(t_list **list);
+void	case_5(t_list **list_a, t_list **list_b);
 
 //final_sort.c
 void	final_sort(t_list **list_a);

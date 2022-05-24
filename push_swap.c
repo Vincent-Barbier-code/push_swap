@@ -91,8 +91,12 @@ int	main(int ac, char **av)
 		ext.min = min(&list_a);
 		ext.max = max(&list_a);
 		len = len_list(&list_a);
-		if (len <= 3)
-			sort_2_3(&list_a);
+		if (len == 2)
+			case_2(&list_a);
+		else if (len == 3)
+			case_3(&list_a);
+		else if (len == 5)
+			case_5(&list_a, &list_b);
 		else if (len < 500)
 			push_tob100(&list_a, &list_b, ext, len);
 		else
