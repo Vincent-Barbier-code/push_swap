@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/25 18:42:39 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 22:06:25 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void	error_ll(t_list **list_a, t_list **list_b);
 void	error_pars_initlst( int ac, char **av, t_list **list_a);
 
 //large_case.c
-int		up_or_down2(t_list **list_a, t_ext ext, int sup, int len);
-int		verif_tob(t_list **list_a, t_ext ext, int sup, int len);
-void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len);
-void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len);
+int		up_or_down2(t_list **list_a, int sup);
+int		verif_tob(t_list **list_a, int sup);
+void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext);
+void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext);
 
 //small_case.c
 void	case_2(t_list **list);

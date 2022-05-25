@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/15 21:37:52 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/25 18:42:50 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 21:46:29 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,49 +37,6 @@ t_put	ft_atoi(const char *str, t_list **list_a)
 		error_l(list_a);
 	put.pass = i;
 	return (put);
-}
-
-int	calcul_ind(int content, int new, int i)
-{
-	if (content > new)
-		i++;
-	return (i);
-}
-
-
-void	trans_ind(t_list **list)
-{
-	t_list	*list_new;
-	t_list	*copy;
-	t_list	*deb;
-	int		i;
-
-	copy = *list;
-		deb = copy;
-	list_new = (*list)->next;
-	while (copy)
-	{
-		i = 0;
-		list_new = copy->next;
-		while (list_new)
-		{
-			i = calcul_ind(copy->content, list_new->content, i);
-			list_new = list_new->next;
-		}
-		list_new = copy->previous;
-		while (list_new)
-		{
-			i = calcul_ind(copy->content, list_new->content, i);
-			list_new = list_new->previous;
-		}
-		copy->indice = i;
-		copy = copy->next;	
-	}
-	while (deb)
-	{
-		deb->content = deb->indice;
-		deb = deb->next;
-	}
 }
 
 void	fill_list_a(char *str, t_list **list_a)

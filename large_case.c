@@ -6,13 +6,13 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:43:21 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/25 18:39:45 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 22:08:22 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
+int	up_or_down2(t_list **list_a, int sup)
 {
 	t_list	*cop_a;
 	int		up;
@@ -30,7 +30,7 @@ int	up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 	{
 		cop_a = cop_a->next;
 	}
-	while (cop_a->previous && cop_a->content< sup)
+	while (cop_a->previous && cop_a->content < sup)
 	{
 		down++;
 		cop_a = cop_a->previous;
@@ -41,7 +41,7 @@ int	up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 		return (1);
 }
 
-int	verif_tob(t_list **list_a, t_ext ext, int sup, int len)
+int	verif_tob(t_list **list_a, int sup)
 {
 	t_list	*copy;
 
@@ -55,7 +55,7 @@ int	verif_tob(t_list **list_a, t_ext ext, int sup, int len)
 	return (0);
 }
 
-void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
+void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext)
 {
 	t_list	*copy;
 	int		sup;
@@ -64,16 +64,15 @@ void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
 	copy = (*list_a);
 	while (len_list(&copy) != 1)
 	{
-		while (verif_tob(&copy, ext, sup, len) && len_list(&copy) != 1)
+		while (verif_tob(&copy, sup) && len_list(&copy) != 1)
 		{
-			if (copy->content< sup \
-			&& (copy->content != ext.max))
+			if (copy->content < sup && (copy->content != ext.max))
 				push_b(&copy, list_b);
 			else
 			{
-				if (up_or_down2(&copy, ext, sup, len) < 0)
+				if (up_or_down2(&copy, sup) < 0)
 					rotate_a(&copy);
-				else if (up_or_down2(&copy, ext, sup, len) > 0)
+				else if (up_or_down2(&copy, sup) > 0)
 					rra(&copy);
 			}
 		}
@@ -82,7 +81,7 @@ void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
 	}
 }
 
-void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len)
+void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext)
 {
 	t_list	*copy;
 	int		sup;
@@ -91,16 +90,15 @@ void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len)
 	sup = 46;
 	while (len_list(&copy) != 1)
 	{
-		while (verif_tob(&copy, ext, sup, len) && len_list(&copy) != 1)
+		while (verif_tob(&copy, sup) && len_list(&copy) != 1)
 		{
-			if (copy->content < sup \
-			&& (copy->content != ext.max))
+			if (copy->content < sup && (copy->content != ext.max))
 				push_b(&copy, list_b);
 			else
 			{
-				if (up_or_down2(&copy, ext, sup, len) < 0)
+				if (up_or_down2(&copy, sup) < 0)
 					rotate_a(&copy);
-				else if (up_or_down2(&copy, ext, sup, len) > 0)
+				else if (up_or_down2(&copy, sup) > 0)
 					rra(&copy);
 			}
 		}

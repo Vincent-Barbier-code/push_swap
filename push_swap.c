@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/25 18:33:30 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 22:10:55 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,15 @@ void	refill_a(t_list **list_a, t_list **list_b)
 	}
 }
 
+t_ext	init_ext(t_list **list)
+{
+	t_ext	ext;
+
+	ext.min = min(list);
+	ext.max = max(list);
+	return (ext);
+}
+
 int	main(int ac, char **av)
 {
 	t_list	*list_a;
@@ -88,8 +97,7 @@ int	main(int ac, char **av)
 	if (!(checkdbandsort(&list_a)))
 	{
 		trans_ind(&list_a);
-		ext.min = min(&list_a);
-		ext.max = max(&list_a);
+		ext = init_ext(&list_a);
 		if (len_list(&list_a) == 2)
 			case_2(&list_a);
 		else if (len_list(&list_a) == 3)
@@ -97,9 +105,9 @@ int	main(int ac, char **av)
 		else if (len_list(&list_a) == 5)
 			case_5(&list_a, &list_b);
 		else if (len_list(&list_a) < 500)
-			push_tob100(&list_a, &list_b, ext, len_list(&list_a));
+			push_tob100(&list_a, &list_b, ext);
 		else
-			push_tob500(&list_a, &list_b, ext, len_list(&list_a));
+			push_tob500(&list_a, &list_b, ext);
 		refill_a(&list_a, &list_b);
 		final_sort(&list_a);
 	}
