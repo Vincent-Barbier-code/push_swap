@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:49 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/23 17:13:09 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:42:39 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 typedef struct s_list
 {
 	int				content;
+	int				indice;
 	struct s_list	*next;
 	struct s_list	*previous;
 }	t_list;
@@ -55,6 +56,7 @@ t_put	ft_atoi(const char *str, t_list **list_a);
 void	fill_list_a(char *str, t_list **list_a);
 int		checkdbandsort(t_list **list_a);
 int		parsing(char *str);
+void	trans_ind(t_list **list);
 
 //error.c
 void	error(void);
@@ -63,7 +65,6 @@ void	error_ll(t_list **list_a, t_list **list_b);
 void	error_pars_initlst( int ac, char **av, t_list **list_a);
 
 //large_case.c
-int		ft_rescale(int num, t_ext ext, int len);
 int		up_or_down2(t_list **list_a, t_ext ext, int sup, int len);
 int		verif_tob(t_list **list_a, t_ext ext, int sup, int len);
 void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len);

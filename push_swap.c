@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/25 18:48:43 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/25 14:00:16 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:33:30 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int	main(int ac, char **av)
 	error_pars_initlst(ac, av, &list_a);
 	if (!(checkdbandsort(&list_a)))
 	{
+		trans_ind(&list_a);
 		ext.min = min(&list_a);
 		ext.max = max(&list_a);
 		if (len_list(&list_a) == 2)

@@ -6,19 +6,11 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 16:43:21 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/23 17:04:01 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 18:39:45 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_rescale(int num, t_ext ext, int len)
-{
-	int	result;
-
-	result = ((float)(num - ext.min) / (float)(ext.max - ext.min)) * (len - 1);
-	return (result);
-}
 
 int	up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 {
@@ -29,7 +21,7 @@ int	up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 	up = 0;
 	down = 0;
 	cop_a = *list_a;
-	while (cop_a->next && ft_rescale(cop_a->content, ext, len) < sup)
+	while (cop_a->next && cop_a->content < sup)
 	{
 		up++;
 		cop_a = cop_a->next;
@@ -38,7 +30,7 @@ int	up_or_down2(t_list **list_a, t_ext ext, int sup, int len)
 	{
 		cop_a = cop_a->next;
 	}
-	while (cop_a->previous && (ft_rescale(cop_a->content, ext, len) < sup))
+	while (cop_a->previous && cop_a->content< sup)
 	{
 		down++;
 		cop_a = cop_a->previous;
@@ -56,7 +48,7 @@ int	verif_tob(t_list **list_a, t_ext ext, int sup, int len)
 	copy = *list_a;
 	while (copy)
 	{
-		if (ft_rescale(copy->content, ext, len) < sup)
+		if (copy->content < sup)
 			return (1);
 		copy = copy->next;
 	}
@@ -74,7 +66,7 @@ void	push_tob100(t_list **list_a, t_list **list_b, t_ext ext, int len)
 	{
 		while (verif_tob(&copy, ext, sup, len) && len_list(&copy) != 1)
 		{
-			if (ft_rescale(copy->content, ext, len) < sup \
+			if (copy->content< sup \
 			&& (copy->content != ext.max))
 				push_b(&copy, list_b);
 			else
@@ -101,7 +93,7 @@ void	push_tob500(t_list **list_a, t_list **list_b, t_ext ext, int len)
 	{
 		while (verif_tob(&copy, ext, sup, len) && len_list(&copy) != 1)
 		{
-			if (ft_rescale(copy->content, ext, len) < sup \
+			if (copy->content < sup \
 			&& (copy->content != ext.max))
 				push_b(&copy, list_b);
 			else
