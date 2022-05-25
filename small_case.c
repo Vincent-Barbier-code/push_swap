@@ -6,7 +6,7 @@
 /*   By: vbarbier <vbarbier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 15:55:16 by vbarbier          #+#    #+#             */
-/*   Updated: 2022/05/23 17:14:35 by vbarbier         ###   ########.fr       */
+/*   Updated: 2022/05/25 13:58:38 by vbarbier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	whatcase_3(t_list **list)
 	return (0);
 }
 
-void case_3(t_list **list)
+void	case_3(t_list **list)
 {
 	if (whatcase_3(list) == 1)
 		swap_a(list);
@@ -61,7 +61,7 @@ void case_3(t_list **list)
 		rra(list);
 }
 
-void case_5(t_list **list_a, t_list **list_b)
+void	case_5(t_list **list_a, t_list **list_b)
 {
 	while (1)
 	{
@@ -70,10 +70,9 @@ void case_5(t_list **list_a, t_list **list_b)
 		if (len_list(list_a) == 3)
 		{
 			case_3(list_a);
-			return ;	
+			return ;
 		}
 		else
 			push_b(list_a, list_b);
-	}
-	
+	}	
 }
